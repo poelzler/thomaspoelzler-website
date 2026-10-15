@@ -25,7 +25,14 @@
     if (open) { searchInput.focus(); } else { searchInput.value = ''; searchBtn.focus(); }
   }
 
-  menuBtn.addEventListener('click', function () { setMenu(true); });
+  menuBtn.addEventListener('click', function () {
+    // Drehung des Menüsymbols neu starten, dann Menü öffnen
+    menuBtn.classList.remove('spin');
+    void menuBtn.offsetWidth;
+    menuBtn.classList.add('spin');
+    setTimeout(function () { menuBtn.classList.remove('spin'); }, 450);
+    setMenu(true);
+  });
   drawerClose.addEventListener('click', function () { setMenu(false); });
   searchBtn.addEventListener('click', function () { setSearch(true); });
   searchBack.addEventListener('click', function () { setSearch(false); });
@@ -96,7 +103,15 @@
     track.scrollTo({ left: j * track.clientWidth, behavior: jump || reduceMotion ? 'auto' : 'smooth' });
     preload(track);
   }
+  var ctrlTimer = null;
   document.addEventListener('click', function (e) {
+    var car = e.target.closest && e.target.closest('.carousel');
+    if (car) {
+      // Beim Antippen (Handy) die Pfeile für einige Sekunden zeigen
+      car.classList.add('ctrl');
+      clearTimeout(ctrlTimer);
+      ctrlTimer = setTimeout(function () { car.classList.remove('ctrl'); }, 3000);
+    }
     var btn = e.target.closest && e.target.closest('.car-btn');
     if (!btn) return;
     var track = btn.parentNode.querySelector('.car-track');
