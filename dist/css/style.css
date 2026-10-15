@@ -297,7 +297,7 @@ button svg { display: block; }
   width: calc(100% * 72.5 / 97.5);
   min-height: 0;
   aspect-ratio: 1.381 / 1;
-  margin: 58.8px 0 16px;
+  margin: 55.4px 0 16px auto;   /* rechtsbündig: Spalten 4 bis 12 */
 }
 .car-track {
   display: flex;
@@ -446,7 +446,7 @@ button svg { display: block; }
   .hero h1 { top: 148px; font-size: 40px; }
   .hero .bar { top: 204px; }
 
-  .carousel { width: 100%; }
+  .carousel { width: 100%; margin-top: 58.8px; }
   .embed-pdf { display: none; }
   .pdf-card {
     display: block;
