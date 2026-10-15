@@ -77,4 +77,38 @@
   window.addEventListener('resize', function () {
     if (window.innerWidth >= 768 && body.classList.contains('menu-open')) setMenu(false);
   });
+
+  // Bilderkarussell: Pfeile, Tastatur, Endlosschleife; Nachbarbilder vorladen
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function slideIndex(track) {
+    return Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+  }
+  function preload(track) {
+    var i = slideIndex(track), slides = track.children;
+    for (var k = i - 1; k <= i + 1; k++) {
+      var img = slides[(k + slides.length) % slides.length].querySelector('img');
+      if (img && img.loading === 'lazy') img.loading = 'eager';
+    }
+  }
+  function go(track, step) {
+    var n = track.children.length, i = slideIndex(track), j = (i + step + n) % n;
+    var jump = Math.abs(j - i) > 1;
+    track.scrollTo({ left: j * track.clientWidth, behavior: jump || reduceMotion ? 'auto' : 'smooth' });
+    preload(track);
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.car-btn');
+    if (!btn) return;
+    var track = btn.parentNode.querySelector('.car-track');
+    go(track, btn.classList.contains('car-prev') ? -1 : 1);
+  });
+  document.addEventListener('keydown', function (e) {
+    var track = e.target.closest && e.target.closest('.car-track');
+    if (!track || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
+    e.preventDefault();
+    go(track, e.key === 'ArrowLeft' ? -1 : 1);
+  });
+  document.addEventListener('scroll', function (e) {
+    if (e.target.classList && e.target.classList.contains('car-track')) preload(e.target);
+  }, true);
 })();

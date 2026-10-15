@@ -284,6 +284,43 @@ button svg { display: block; }
 }
 .pdf-open svg { fill: #fff; }
 .pdf-open:hover, .pdf-open:focus-visible { background: #3c4043; }
+/* Kompakte Vorschaukarte am Handy (wie die Drive-Einbettung im Original) */
+.pdf-card { display: none; }
+
+/* Bilderkarussell (Pictures) */
+.carousel { position: relative; width: 75%; margin: 32px 0 29px; }
+.car-track {
+  display: flex;
+  aspect-ratio: 1.381 / 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  background: #f1f1f1;
+}
+.car-track::-webkit-scrollbar { display: none; }
+.car-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.car-slide { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+.car-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.car-btn {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(32, 33, 36, .6);
+  cursor: pointer;
+}
+.car-btn svg { fill: #fff; }
+.car-btn:hover, .car-btn:focus-visible { background: rgba(32, 33, 36, .85); }
+.car-prev { left: 12px; }
+.car-next { right: 12px; }
 
 .portrait { margin: 32px 0 29px; }
 .portrait img { display: block; width: 100%; height: auto; }
@@ -299,7 +336,9 @@ button svg { display: block; }
 
 /* ---------- Handy ---------- */
 @media (max-width: 767px) {
-  :root { --gutter: 19px; }
+  :root { --gutter: 19.5px; }
+  /* Im Original ist die Textspalte am Handy links 19,5 px und rechts etwa 19,1 px vom Rand entfernt */
+  .page { width: calc(100% - 38.6px); margin: 0 19.1px 0 19.5px; }
 
   .menu-btn {
     display: grid;
@@ -378,18 +417,53 @@ button svg { display: block; }
   .open > .toggle svg { transform: rotate(180deg); }
 
   .hero { height: 300px; }
-  .content h2.sec { margin: 44px 0 14.75px; font-size: 26.67px; }
+  .content h2.sec { margin: 44px 0 16.25px; padding-right: 8px; font-size: 26.67px; }
+  /* Einige Überschriften sind im Original am Handy etwas größer */
+  .content h2.sec.lg { font-size: 28px; }
+  .content h2.sec.md { font-size: 27.5px; }
   .content h2.sec.tight { margin-top: 27.5px; }
-  .content > h2.sec:first-child { margin-top: 3.8px; }
+  .content > h2.sec:first-child, .content.p-research-publications > h2.sec:first-child { margin-top: -0.5px; }
+  .content.p-about, .content.p-research, .content.p-teaching { padding-bottom: 57px; }
+  /* Projects: Textfelder im Original am Handy schmaler */
+  .content.p-research-projects p, .content.p-research-projects h2.sec { padding-right: 24px; }
   .hero h1 { top: 148px; font-size: 40px; }
   .hero .bar { top: 204px; }
 
-  .site-footer .page { padding: 37px 8px 31px; }
+  .carousel { width: 100%; }
+  .embed-pdf { display: none; }
+  .pdf-card {
+    display: block;
+    margin: 55px 0 39px;
+    border: 1px solid #e3e3e3;
+    background: #000;
+    padding-top: 9px;
+    color: #202124;
+    text-decoration: none;
+  }
+  .pdf-card-prev { display: block; height: 198px; overflow: hidden; background: #fff; }
+  .pdf-card-prev img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 72%; }
+  .pdf-card-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    margin-top: 9px;
+    padding: 0 13px;
+    background: #f2f2f2;
+    font: 400 16px/1 var(--head);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pdf-card-name svg { flex: 0 0 22px; fill: #d93025; }
+
+  .site-footer .page { padding: 36px 8px 34px; }
   .site-footer .name { font-size: 26.67px; line-height: 32px; }
-  .site-footer .links { font-size: 20px; line-height: 31.7px; }
-  .site-footer .name + .links { margin-top: 22px; }
+  .site-footer .links { font-size: 20px; line-height: 30.67px; }
+  .site-footer .name + .links { margin-top: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .drawer, .scrim, .toggle svg { transition: none !important; }
+  .car-track { scroll-behavior: auto; }
 }

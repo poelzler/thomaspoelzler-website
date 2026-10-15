@@ -70,6 +70,8 @@ PAGES = [
      "description": "Teaching materials by Thomas Pölzler: academic writing, critical thinking, ethics and political philosophy, Theory of Knowledge and quizzes."},
     {"path": "/cv", "src": "cv.html", "hero": "CV", "title": "Thomas Pölzler - CV",
      "description": "Curriculum vitae of Thomas Pölzler."},
+    {"path": "/pictures", "src": "pictures.html", "hero": "Pictures", "title": "Thomas Pölzler - Pictures",
+     "description": "Pictures from journeys of Thomas Pölzler."},
     {"path": "/imprint", "src": "imprint.html", "hero": "Imprint", "title": "Thomas Pölzler - Imprint",
      "description": "Imprint and data protection declaration of thomaspoelzler.com."},
 ]
@@ -263,8 +265,13 @@ def build_preview():
            "/img/logo-unigraz.png": "data:image/png;base64," + b64(os.path.join(A, "img", "logo-unigraz.png"))}
     for f in sorted(os.listdir(os.path.join(A, "files", "cv"))):
         img["/files/cv/" + f] = "data:image/webp;base64," + b64(os.path.join(A, "files", "cv", f))
+    for f in sorted(os.listdir(os.path.join(A, "img", "pictures"))):
+        if f.endswith("-800.webp"):
+            img["/img/pictures/" + f] = "data:image/webp;base64," + b64(os.path.join(A, "img", "pictures", f))
 
     def localize(s):
+        # Vorschau: nur die kleinen Fotos einbetten (srcset würde die Daten verdoppeln)
+        s = re.sub(r' srcset="[^"]*" sizes="[^"]*"', "", s)
         for k, v in img.items():
             s = s.replace('src="%s"' % k, 'src="%s"' % v)
         return re.sub(r'href="/(?!files/)([^"]*)"', lambda m: 'href="#/%s"' % m.group(1), s)
@@ -280,7 +287,6 @@ def build_preview():
     names = {href: label for label, href, subs in NAV for _ in [0]}
     names.update({sh: sl for _, _, subs in NAV for sl, sh in subs})
     names["/imprint"] = "Imprint"
-    names["/pictures"] = "Pictures"
     site_js = open(os.path.join(A, "js", "site.js"), encoding="utf-8").read()
     router = ROUTER % json.dumps(names, ensure_ascii=False)
     pdf64 = b64(os.path.join(A, "files", "CV_Thomas_Poelzler.pdf"))
