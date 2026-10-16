@@ -53,46 +53,51 @@
     if (e.key !== 'Escape') return;
     if (body.classList.contains('search-open')) setSearch(false);
     if (body.classList.contains('menu-open')) setMenu(false);
-    each(document.querySelectorAll('.main-nav .has-sub.open'), function (li) { li.classList.remove('open'); });
+    closeSubs(null);
   });
 
-  // Untermenues im Seitenmenue auf- und zuklappen
-  each(document.querySelectorAll('.drawer .toggle'), function (btn) {
-    btn.addEventListener('click', function () {
-      var li = btn.parentNode;
-      var open = li.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      btn.setAttribute('aria-label', btn.getAttribute('aria-label').replace(open ? 'Expand' : 'Collapse', open ? 'Collapse' : 'Expand'));
-    });
-  });
-
-  // Aufklappmenues am Desktop (Tastatur und Touch)
-  // Es ist immer nur ein Untermenue offen: Oeffnen eines Menues schliesst die anderen
-  function closeSubs(except) {
-    each(document.querySelectorAll('.main-nav .has-sub.open'), function (li) {
-      if (li === except) return;
-      li.classList.remove('open');
-      if (li.contains(document.activeElement)) document.activeElement.blur();
-      var c = li.querySelector('.chev');
-      if (c) c.setAttribute('aria-expanded', 'false');
-    });
+  // Untermenues im Seitenmenue auf- und zuklappen (Pfeil oder Name des Oberpunkts)
+  function toggleGroup(li) {
+    var open = li.classList.toggle('open');
+    var btn = li.querySelector('.toggle'), par = li.querySelector('.parent');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', btn.getAttribute('aria-label').replace(open ? 'Expand' : 'Collapse', open ? 'Collapse' : 'Expand'));
+    if (par) par.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
-  each(document.querySelectorAll('.main-nav .chev'), function (chev) {
-    chev.addEventListener('click', function () {
-      var li = chev.parentNode;
-      closeSubs(li);
-      var open = li.classList.toggle('open');
-      chev.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (!open) chev.blur();
-    });
+  each(document.querySelectorAll('.drawer .group'), function (li) {
+    li.querySelector('.toggle').addEventListener('click', function () { toggleGroup(li); });
+    var par = li.querySelector('.parent');
+    if (par) par.addEventListener('click', function (e) { e.preventDefault(); toggleGroup(li); });
   });
+
+  // Aufklappmenues am Desktop: Klick auf Oberpunkt oder Pfeil oeffnet nur das Untermenue.
+  // Es ist immer nur ein Untermenue offen: Oeffnen eines Menues schliesst die anderen
+  function setSub(li, open) {
+    li.classList.toggle('open', open);
+    each(li.querySelectorAll('.chev, .parent'), function (el) { el.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+    if (!open && li.contains(document.activeElement)) document.activeElement.blur();
+  }
+  function closeSubs(except) {
+    each(document.querySelectorAll('.main-nav .has-sub.open'), function (li) { if (li !== except) setSub(li, false); });
+  }
   each(document.querySelectorAll('.main-nav .has-sub'), function (li) {
-    li.addEventListener('mouseenter', function (e) {
-      if (e.pointerType !== 'touch') closeSubs(li);
-    });
+    function toggle(e) {
+      e.preventDefault();
+      closeSubs(li);
+      setSub(li, !li.classList.contains('open'));
+    }
+    li.querySelector('.chev').addEventListener('click', toggle);
+    li.querySelector('.parent').addEventListener('click', toggle);
+    li.addEventListener('mouseenter', function () { closeSubs(li); });
   });
   document.addEventListener('click', function (e) {
     if (e.target.closest && !e.target.closest('.main-nav .has-sub')) closeSubs(null);
+  });
+  // Oberpunkte verhalten sich wie Knoepfe: auch die Leertaste oeffnet das Untermenue
+  each(document.querySelectorAll('.parent'), function (a) {
+    a.addEventListener('keydown', function (e) {
+      if (e.key === ' ') { e.preventDefault(); a.click(); }
+    });
   });
 
   // Wechsel auf Desktop-Breite schliesst das Seitenmenue
