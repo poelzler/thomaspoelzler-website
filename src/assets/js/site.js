@@ -67,17 +67,32 @@
   });
 
   // Aufklappmenues am Desktop (Tastatur und Touch)
+  // Es ist immer nur ein Untermenue offen: Oeffnen eines Menues schliesst die anderen
+  function closeSubs(except) {
+    each(document.querySelectorAll('.main-nav .has-sub.open'), function (li) {
+      if (li === except) return;
+      li.classList.remove('open');
+      if (li.contains(document.activeElement)) document.activeElement.blur();
+      var c = li.querySelector('.chev');
+      if (c) c.setAttribute('aria-expanded', 'false');
+    });
+  }
   each(document.querySelectorAll('.main-nav .chev'), function (chev) {
     chev.addEventListener('click', function () {
       var li = chev.parentNode;
+      closeSubs(li);
       var open = li.classList.toggle('open');
       chev.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (!open) chev.blur();
+    });
+  });
+  each(document.querySelectorAll('.main-nav .has-sub'), function (li) {
+    li.addEventListener('mouseenter', function (e) {
+      if (e.pointerType !== 'touch') closeSubs(li);
     });
   });
   document.addEventListener('click', function (e) {
-    if (e.target.closest && !e.target.closest('.main-nav .has-sub')) {
-      each(document.querySelectorAll('.main-nav .has-sub.open'), function (li) { li.classList.remove('open'); });
-    }
+    if (e.target.closest && !e.target.closest('.main-nav .has-sub')) closeSubs(null);
   });
 
   // Wechsel auf Desktop-Breite schliesst das Seitenmenue
@@ -93,8 +108,9 @@
   function preload(track) {
     var i = slideIndex(track), slides = track.children;
     for (var k = i - 1; k <= i + 1; k++) {
-      var img = slides[(k + slides.length) % slides.length].querySelector('img');
-      if (img && img.loading === 'lazy') img.loading = 'eager';
+      each(slides[(k + slides.length) % slides.length].querySelectorAll('img'), function (img) {
+        if (img.loading === 'lazy') img.loading = 'eager';
+      });
     }
   }
   function go(track, step) {

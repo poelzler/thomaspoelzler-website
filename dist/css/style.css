@@ -103,9 +103,14 @@ button svg { display: block; }
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2), 0 4px 14px rgba(0, 0, 0, .15);
 }
-.main-nav .has-sub:hover > .sub,
+/* Untermenü: per Klick/Tippen (.open), mit Tastatur oder beim Darüberfahren mit der Maus.
+   Hover nur bei echten Mausgeräten, sonst bleiben am Touchscreen alte Menüs offen */
 .main-nav .has-sub:focus-within > .sub,
 .main-nav .has-sub.open > .sub { display: block; }
+@media (hover: hover) and (pointer: fine) {
+  .main-nav .has-sub:hover > .sub { display: block; }
+  .main-nav:has(.has-sub:hover) .has-sub:not(:hover) > .sub { display: none; }
+}
 .main-nav .sub li { display: block; }
 .main-nav .sub a { display: block; padding: 0 16px 0 42px; font-size: 16px; line-height: 42px; color: var(--grey); white-space: nowrap; }
 .main-nav .sub a:hover, .main-nav .sub a:focus { color: var(--ink); background: #f1f1f1; }
@@ -214,10 +219,40 @@ button svg { display: block; }
   margin-left: -50px;
   background: var(--accent);
 }
+/* Desktop und Tablet: Titel in einem Feld über 8 von 12 Spalten; ist er zu lang (z. B. „Grants & Awards“
+   bei 768 px), bricht er um und das Titelbild wird höher, wie bei Google Sites */
+@media (min-width: 768px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 310px;
+    padding: 120.1px 0 64.4px;
+    background-size: auto max(320px, 100%);
+  }
+  .hero h1, .hero .bar { position: static; flex: none; }
+  .hero h1 {
+    max-width: calc(min(1154.4px, 97.5% - 93.6px) * .6581);
+    padding: 0;
+    line-height: 1.26;
+  }
+  .hero .bar { margin: 12px 0 0; }
+  /* Publications: Abstände um die Überschriften werden bei schmaleren Fenstern etwas kleiner
+     (gemessen bei 768 und 1440 px) */
+  .content.p-research-publications h2.sec {
+    margin-top: min(44.16px, 43.16px + (100vw - 768px) / 672);
+    margin-bottom: min(17.88px, 16.88px + (100vw - 768px) / 672);
+  }
+  .content.p-research-publications .lead-s { padding-top: min(18px, 16px + (100vw - 768px) / 336); }
+}
+
 
 /* ---------- Inhalt ---------- */
-/* Textspalte wie bei Google Sites: wächst mit der Fensterbreite (97,5 % minus 92,8 px), höchstens 1154,4 px */
-.page { width: min(1154.4px, 97.5% - 92.8px); margin: 0 auto; }
+/* Textspalte wie bei Google Sites: wächst mit der Fensterbreite (97,5 % minus 93,6 px), höchstens 1154,4 px */
+.page { width: min(1154.4px, 97.5% - 93.6px); margin: 0 auto; }
 .content { padding: 32.7px 0 49px; }
 .content.p-start { padding-top: 38px; }
 /* Seiten, die im Original mit einer Leerzeile enden */
@@ -230,7 +265,7 @@ button svg { display: block; }
 /* Abschnittsüberschriften (Google-Sites-Stil „Heading“, 26 pt) */
 .content h2.sec {
   margin: 42.16px 0 17.88px;
-  padding: 0 48px 0 8px;
+  padding: 0 2.08% 0 8px;
   color: var(--accent);
   font: 400 34.67px/1.5 var(--head);
 }
@@ -315,6 +350,16 @@ button svg { display: block; }
 .car-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .car-slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
 .car-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Hochformat: Bild vollständig zeigen, dahinter eine unscharfe, abgedunkelte Vergrößerung desselben Bildes */
+.car-slide.tall { position: relative; overflow: hidden; background: #2a2a2a; }
+.car-slide.tall img { position: relative; object-fit: contain; }
+.car-slide.tall .car-bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  filter: blur(24px) brightness(.75);
+  transform: scale(1.15);
+}
 .car-btn {
   position: absolute;
   top: 50%;
@@ -494,4 +539,22 @@ button svg { display: block; }
   .menu-btn svg, .drawer-close svg { animation: none !important; }
   .menu-open .site-header { transition: none; }
   .car-track { scroll-behavior: auto; }
+}
+
+/* Tablet: Lebenslauf als Vorschaukarte wie am Handy (das Original zeigt hier keinen großen Betrachter) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .embed-pdf { display: none; }
+  .pdf-card {
+    display: block;
+    margin: 55.8px 0 39px;
+    border: 1px solid #e3e3e3;
+    background: #000;
+    padding-top: 9px;
+    color: #202124;
+    text-decoration: none;
+  }
+  .pdf-card-prev { display: block; height: 215px; overflow: hidden; background: #fff; }
+  .pdf-card-prev img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .pdf-card-name { display: flex; align-items: center; gap: 10px; height: 48px; margin-top: 9px; padding: 0 13px; background: #f2f2f2; font: 400 16px/1 var(--head); }
+  .pdf-card-name svg { flex: 0 0 22px; fill: #d93025; }
 }
