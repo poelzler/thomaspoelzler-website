@@ -42,6 +42,8 @@ NAV = [
 PAGES = [
     {"path": "/", "src": "start.html", "hero": "Welcome!", "title": "Thomas Pölzler",
      "description": "I am a researcher and lecturer at the Section Moral and Political Philosophy of the University of Graz, Austria. My main areas of research are metaethics and moral psychology."},
+    {"path": "/about", "src": "about.html", "hero": "About", "title": "Thomas Pölzler - About",
+     "description": "About Thomas Pölzler: education, positions, grants and awards, and contact information."},
     {"path": "/about/education", "src": "education.html", "hero": "Education", "title": "Thomas Pölzler - Education",
      "description": "Education of Thomas Pölzler: Dr. phil in Philosophy, MA in Political, Economic and Legal Philosophy, and Mag. phil. in Philosophy (University of Graz)."},
     {"path": "/about/positions", "src": "positions.html", "hero": "Positions", "title": "Thomas Pölzler - Positions",
@@ -50,6 +52,8 @@ PAGES = [
      "description": "Grants, fellowships and awards of Thomas Pölzler, including a Marie Skłodowska-Curie Fellowship and the Wolfgang Stegmüller Award."},
     {"path": "/about/contact", "src": "contact.html", "hero": "Contact", "title": "Thomas Pölzler - Contact",
      "description": "Contact Thomas Pölzler: e-mail, phone, postal address at the University of Graz and academic profiles."},
+    {"path": "/research", "src": "research.html", "hero": "Research", "title": "Thomas Pölzler - Research",
+     "description": "Research of Thomas Pölzler: interests, publications, presentations and projects."},
     {"path": "/research/interests", "src": "interests.html", "hero": "Interests", "title": "Thomas Pölzler - Interests",
      "description": "Research interests of Thomas Pölzler: metaethics, empirical research on morality, political philosophy and Albert Camus."},
     {"path": "/research/publications", "src": "publications.html", "hero": "Publications", "title": "Thomas Pölzler - Publications",
@@ -58,6 +62,8 @@ PAGES = [
      "description": "Talks and presentations by Thomas Pölzler at universities, conferences and workshops worldwide."},
     {"path": "/research/projects", "src": "projects.html", "hero": "Projects", "title": "Thomas Pölzler - Projects",
      "description": "Research projects of Thomas Pölzler, including the Marie Skłodowska-Curie project Making Morality Impartial."},
+    {"path": "/teaching", "src": "teaching.html", "hero": "Teaching", "title": "Thomas Pölzler - Teaching",
+     "description": "Teaching of Thomas Pölzler: courses and teaching materials."},
     {"path": "/teaching/courses", "src": "courses.html", "hero": "Courses", "title": "Thomas Pölzler - Courses",
      "description": "Courses taught by Thomas Pölzler at the University of Graz and elsewhere."},
     {"path": "/teaching/materials", "src": "materials.html", "hero": "Materials", "title": "Thomas Pölzler - Materials",
@@ -236,8 +242,7 @@ def build_site():
     doc = re.sub(r'<meta property="og:url"[^>]*>\n', "", doc)
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(doc)
     # Weiterleitungen und Sitemap für Cloudflare Pages
-    open(os.path.join(OUT, "_redirects"), "w").write(
-        "/start / 301\n/about /about/education 301\n/research /research/interests 301\n/teaching /teaching/courses 301\n")
+    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n")
     urls = "".join("  <url><loc>%s%s</loc></url>\n" % (SITE_URL, p["path"]) for p in PAGES)
     open(os.path.join(OUT, "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % urls)
