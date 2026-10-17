@@ -190,6 +190,8 @@ def head(page, css, extra=""):
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         '<title>%s</title>\n<meta name="description" content="%s">\n'
         '<meta name="author" content="Thomas Pölzler">\n'
+        '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n'
+        '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
         '<link rel="canonical" href="%s">\n'
         '<meta property="og:site_name" content="Thomas Pölzler">\n<meta property="og:locale" content="en_US">\n'
         '<meta property="og:title" content="%s">\n<meta property="og:type" content="%s">\n'
