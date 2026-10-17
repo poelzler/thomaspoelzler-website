@@ -7,6 +7,7 @@ Ausgabe:
 import base64
 import html
 import json
+import subprocess
 import os
 import re
 import shutil
@@ -41,42 +42,42 @@ NAV = [
 
 # Fertig nachgebaute Seiten: Pfad, Inhaltsdatei, Seitentitel im Titelbild, Beschreibung
 PAGES = [
-    {"path": "/", "src": "start.html", "hero": "Welcome!", "title": "Thomas Pölzler",
-     "description": "I am a researcher and lecturer at the Section Moral and Political Philosophy of the University of Graz, Austria. My main areas of research are metaethics and moral psychology."},
+    {"path": "/", "src": "start.html", "hero": "Welcome!", "title": "Thomas Pölzler – Philosopher, University of Graz",
+     "description": "I am a philosopher at the University of Graz, Austria. My research focuses on metaethics, moral psychology, experimental philosophy and basic needs."},
     {"path": "/about", "src": "about.html", "hero": "About", "title": "Thomas Pölzler - About",
-     "description": "About Thomas Pölzler: education, positions, grants and awards, and contact information."},
+     "description": "About Thomas Pölzler, philosopher at the University of Graz, Austria: education, academic positions, grants and awards, and contact details."},
     {"path": "/about/education", "src": "education.html", "hero": "Education", "title": "Thomas Pölzler - Education",
-     "description": "Education of Thomas Pölzler: Dr. phil in Philosophy, MA in Political, Economic and Legal Philosophy, and Mag. phil. in Philosophy (University of Graz)."},
+     "description": "Education of philosopher Thomas Pölzler: Dr. phil. in Philosophy, MA in Political, Economic and Legal Philosophy and Mag. phil. in Philosophy (University of Graz)."},
     {"path": "/about/positions", "src": "positions.html", "hero": "Positions", "title": "Thomas Pölzler - Positions",
-     "description": "Research, teaching and visiting positions of Thomas Pölzler at the University of Graz, the University of Tokyo, the College of Charleston and elsewhere."},
+     "description": "Academic positions of Thomas Pölzler: Marie Skłodowska-Curie Fellow, researcher and lecturer at the University of Graz, and research stays in Tokyo and Charleston."},
     {"path": "/about/grants-awards", "src": "grants-awards.html", "hero": "Grants & Awards", "title": "Thomas Pölzler - Grants & Awards",
-     "description": "Grants, fellowships and awards of Thomas Pölzler, including a Marie Skłodowska-Curie Fellowship and the Wolfgang Stegmüller Award."},
+     "description": "Grants and awards of Thomas Pölzler, including a Marie Skłodowska-Curie Global Fellowship, the Wolfgang Stegmüller Award and a JSPS Postdoctoral Fellowship."},
     {"path": "/about/contact", "src": "contact.html", "hero": "Contact", "title": "Thomas Pölzler - Contact",
-     "description": "Contact Thomas Pölzler: e-mail, phone, postal address at the University of Graz and academic profiles."},
+     "description": "Contact Thomas Pölzler, Department of Philosophy, University of Graz: e-mail, phone, postal address and profiles on Google Scholar, PhilPeople and ResearchGate."},
     {"path": "/research", "src": "research.html", "hero": "Research", "title": "Thomas Pölzler - Research",
-     "description": "Research of Thomas Pölzler: interests, books, papers, presentations and projects."},
+     "description": "Research of philosopher Thomas Pölzler on metaethics, moral psychology, experimental philosophy and basic needs: books, papers, presentations and projects."},
     {"path": "/research/interests", "src": "interests.html", "hero": "Interests", "title": "Thomas Pölzler - Interests",
-     "description": "Research interests of Thomas Pölzler: metaethics, empirical research on morality, political philosophy and Albert Camus."},
+     "description": "Research interests of Thomas Pölzler: metaethics, empirical research on morality, experimental philosophy, political philosophy, basic needs and Albert Camus."},
     {"path": "/research/books", "src": "books.html", "hero": "Books", "title": "Thomas Pölzler - Books",
      "description": "Books by Thomas Pölzler: A Philosophical Perspective on Folk Moral Objectivism (Routledge 2022) and Moral Reality and the Empirical Sciences (Routledge 2018)."},
     {"path": "/research/papers", "src": "papers.html", "hero": "Papers", "title": "Thomas Pölzler - Papers",
-     "description": "Papers by Thomas Pölzler: journal articles, chapters, edited volumes, commentaries, reviews and op-eds on metaethics, moral psychology, basic needs and Albert Camus."},
+     "description": "Papers by Thomas Pölzler on metaethics, moral psychology, experimental philosophy, basic needs and Albert Camus: journal articles, chapters, reviews and op-eds."},
     {"path": "/research/presentations", "src": "presentations.html", "hero": "Presentations", "title": "Thomas Pölzler - Presentations",
-     "description": "Talks and presentations by Thomas Pölzler at universities, conferences and workshops worldwide."},
+     "description": "Talks by Thomas Pölzler on metaethics, folk moral objectivism, basic needs and experimental philosophy at universities, conferences and workshops worldwide."},
     {"path": "/research/projects", "src": "projects.html", "hero": "Projects", "title": "Thomas Pölzler - Projects",
-     "description": "Research projects of Thomas Pölzler, including the Marie Skłodowska-Curie project Making Morality Impartial."},
+     "description": "Research projects of Thomas Pölzler on the veil of ignorance, basic needs, climate justice and moral realism, funded by the EU, JSPS and the Austrian Science Fund."},
     {"path": "/teaching", "src": "teaching.html", "hero": "Teaching", "title": "Thomas Pölzler - Teaching",
-     "description": "Teaching of Thomas Pölzler: courses and teaching materials."},
+     "description": "Teaching of Thomas Pölzler at the University of Graz and elsewhere: courses in ethics, political philosophy and experimental philosophy, and teaching materials."},
     {"path": "/teaching/courses", "src": "courses.html", "hero": "Courses", "title": "Thomas Pölzler - Courses",
-     "description": "Courses taught by Thomas Pölzler at the University of Graz and elsewhere."},
+     "description": "Courses taught by Thomas Pölzler at the University of Graz and elsewhere, on ethics, metaethics, political philosophy, climate ethics and experimental philosophy."},
     {"path": "/teaching/materials", "src": "materials.html", "hero": "Materials", "title": "Thomas Pölzler - Materials",
-     "description": "Teaching materials by Thomas Pölzler: academic writing, critical thinking, ethics and political philosophy, Theory of Knowledge and quizzes."},
+     "description": "Free teaching materials by Thomas Pölzler: academic writing, critical thinking, ethics and political philosophy, IB Theory of Knowledge, and quizzes."},
     {"path": "/cv", "src": "cv.html", "hero": "CV", "title": "Thomas Pölzler - CV",
-     "description": "Curriculum vitae of Thomas Pölzler."},
+     "description": "Curriculum vitae of Thomas Pölzler, philosopher at the University of Graz: education, positions, grants and awards, publications, talks and teaching (PDF)."},
     {"path": "/pictures", "src": "pictures.html", "hero": "Pictures", "title": "Thomas Pölzler - Pictures",
-     "description": "Pictures from journeys of Thomas Pölzler."},
+     "description": "Pictures by Thomas Pölzler from his travels around the world."},
     {"path": "/imprint", "src": "imprint.html", "hero": "Imprint", "title": "Thomas Pölzler - Imprint",
-     "description": "Imprint and data protection declaration of thomaspoelzler.com."},
+     "description": "Imprint and data protection declaration of thomaspoelzler.com, the website of philosopher Thomas Pölzler (University of Graz)."},
 ]
 
 
@@ -188,29 +189,98 @@ def head(page, css, extra=""):
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         '<title>%s</title>\n<meta name="description" content="%s">\n'
+        '<meta name="author" content="Thomas Pölzler">\n'
         '<link rel="canonical" href="%s">\n'
-        '<meta property="og:title" content="%s">\n<meta property="og:type" content="website">\n'
+        '<meta property="og:site_name" content="Thomas Pölzler">\n<meta property="og:locale" content="en_US">\n'
+        '<meta property="og:title" content="%s">\n<meta property="og:type" content="%s">\n'
         '<meta property="og:url" content="%s">\n<meta property="og:description" content="%s">\n'
+        '<meta property="og:image" content="%s/img/portrait.jpg">\n<meta property="og:image:width" content="1154">\n'
+        '<meta property="og:image:height" content="633">\n'
+        '<meta property="og:image:alt" content="Thomas Pölzler in front of the main building of the University of Graz">\n'
+        '<meta name="twitter:card" content="summary_large_image">\n'
         '%s%s</head>\n'
-    ) % (e(page["title"]), e(page["description"]), url, e(page["title"]), url, e(page["description"]), css, extra)
+    ) % (e(page["title"]), e(page["description"]), url, e(page["title"]),
+         "profile" if page["path"] == "/" else "website", url, e(page["description"]), SITE_URL, css, extra)
 
 
 PERSON_LD = {
-    "@context": "https://schema.org",
     "@type": "Person",
+    "@id": SITE_URL + "/#person",
     "name": "Thomas Pölzler",
+    "alternateName": ["Thomas Poelzler", "Thomas Polzler"],
+    "givenName": "Thomas",
+    "familyName": "Pölzler",
     "url": SITE_URL + "/",
-    "jobTitle": "Researcher and lecturer in philosophy",
+    "image": SITE_URL + "/img/portrait.jpg",
+    "jobTitle": "Philosopher",
+    "description": "Philosopher at the University of Graz, Austria, working on metaethics, moral psychology, experimental philosophy and basic needs.",
     "email": "mailto:thomas.poelzler@uni-graz.at",
+    "worksFor": {"@type": "CollegeOrUniversity", "name": "University of Graz", "url": "https://www.uni-graz.at/en/"},
     "affiliation": {"@type": "CollegeOrUniversity", "name": "University of Graz", "url": "https://www.uni-graz.at/en/"},
-    "knowsAbout": ["Metaethics", "Moral psychology", "Basic needs", "Distributive justice", "Environmental ethics", "Albert Camus"],
+    "alumniOf": [{"@type": "CollegeOrUniversity", "name": "University of Graz"},
+                 {"@type": "CollegeOrUniversity", "name": "University of New Brunswick"}],
+    "knowsAbout": ["Philosophy", "Metaethics", "Moral psychology", "Experimental philosophy", "Folk moral objectivism",
+                   "Moral realism", "Basic needs", "Distributive justice", "Environmental ethics", "Political philosophy", "Albert Camus"],
+    "award": ["Promotion Award for Science and Research of the Province of Styria 2023",
+              "Marie Skłodowska-Curie Global Postdoctoral Fellowship", "Wolfgang Stegmüller Award 2022",
+              "JSPS Postdoctoral Fellowship"],
     "sameAs": [
         "https://scholar.google.at/citations?user=pPmGiWUAAAAJ",
         "https://www.researchgate.net/profile/Thomas_Poelzler/",
-        "http://uni-graz.academia.edu/ThomasP%C3%B6lzler",
+        "https://uni-graz.academia.edu/ThomasP%C3%B6lzler",
         "https://philpeople.org/profiles/thomas-polzler",
     ],
 }
+PERSON_REF = {"@id": SITE_URL + "/#person"}
+
+BOOKS_LD = [
+    {"@type": "Book", "name": "A Philosophical Perspective on Folk Moral Objectivism", "author": PERSON_REF,
+     "publisher": {"@type": "Organization", "name": "Routledge"}, "datePublished": "2022-12-16", "numberOfPages": 236,
+     "isbn": "9780367539740", "inLanguage": "en", "image": SITE_URL + "/img/books/folk-moral-objectivism.jpg",
+     "url": "https://www.routledge.com/A-Philosophical-Perspective-on-Folk-Moral-Objectivism/Polzler/p/book/9780367539740"},
+    {"@type": "Book", "name": "Moral Reality and the Empirical Sciences", "author": PERSON_REF,
+     "publisher": {"@type": "Organization", "name": "Routledge"}, "datePublished": "2018", "numberOfPages": 248,
+     "isbn": "9781138503090", "inLanguage": "en", "image": SITE_URL + "/img/books/moral-reality.jpg",
+     "isPartOf": {"@type": "BookSeries", "name": "Routledge Studies in Ethics and Moral Theory"},
+     "url": "https://www.routledge.com/Moral-Reality-and-the-Empirical-Sciences/Polzler/p/book/9781138503090"},
+]
+
+
+def structured_data(page):
+    """Strukturierte Daten für Suchmaschinen (schema.org als JSON-LD)."""
+    url = SITE_URL + page["path"] if page["path"] != "/" else SITE_URL + "/"
+    graph = []
+    if page["path"] == "/":
+        graph.append({"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL + "/", "name": "Thomas Pölzler",
+                      "inLanguage": "en", "publisher": PERSON_REF})
+        graph.append({"@type": "ProfilePage", "@id": url, "url": url, "name": page["title"], "mainEntity": PERSON_REF,
+                      "isPartOf": {"@id": SITE_URL + "/#website"}})
+        graph.append(PERSON_LD)
+    else:
+        graph.append({"@type": "WebPage", "@id": url, "url": url, "name": page["title"], "description": page["description"],
+                      "about": PERSON_REF, "isPartOf": {"@id": SITE_URL + "/#website"}})
+        crumbs = [("Thomas Pölzler", SITE_URL + "/")]
+        parts = page["path"].strip("/").split("/")
+        if len(parts) == 2:
+            parent = next(l for l, h, subs in NAV if h == "/" + parts[0])
+            crumbs.append((parent, SITE_URL + "/" + parts[0]))
+        crumbs.append((page["hero"], url))
+        graph.append({"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]})
+        if page["path"] == "/research/books":
+            graph.extend(BOOKS_LD)
+    return '<script type="application/ld+json">%s</script>\n' % json.dumps(
+        {"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
+
+
+def lastmod(page):
+    """Datum der letzten Änderung der Inhaltsdatei laut Git (für die Sitemap)."""
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", os.path.join(ROOT, "pages", page["src"])],
+                             cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        return out or None
+    except OSError:
+        return None
 
 
 def out_file(path):
@@ -226,9 +296,7 @@ def build_site():
     css = '<link rel="stylesheet" href="/css/fonts.css">\n<link rel="stylesheet" href="/css/style.css">\n'
     for page in PAGES:
         body = open(os.path.join(ROOT, "pages", page["src"]), encoding="utf-8").read()
-        extra = ""
-        if page["path"] == "/":
-            extra = '<script type="application/ld+json">%s</script>\n' % json.dumps(PERSON_LD, ensure_ascii=False)
+        extra = structured_data(page)
         doc = (head(page, css, extra) + "<body>\n" + chrome_top(page["path"]) + main_block(page, body)
                + FOOTER + '<script src="/js/site.js" defer></script>\n</body>\n</html>\n')
         dest = os.path.join(OUT, out_file(page["path"]))
@@ -246,7 +314,12 @@ def build_site():
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(doc)
     # Weiterleitungen und Sitemap für Cloudflare Pages
     open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n")
-    urls = "".join("  <url><loc>%s%s</loc></url>\n" % (SITE_URL, p["path"]) for p in PAGES)
+    urls = "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, p["path"], "<lastmod>%s</lastmod>" % lastmod(p) if lastmod(p) else "")
+                   for p in PAGES)
+    # Die Vorschau-Adressen bei Cloudflare (pages.dev) sollen nicht in Google erscheinen, nur die eigene Domain
+    open(os.path.join(OUT, "_headers"), "w").write(
+        "https://thomaspoelzler.pages.dev/*\n  X-Robots-Tag: noindex\n"
+        "https://:version.thomaspoelzler.pages.dev/*\n  X-Robots-Tag: noindex\n")
     open(os.path.join(OUT, "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % urls)
     open(os.path.join(OUT, "robots.txt"), "w").write("User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % SITE_URL)
