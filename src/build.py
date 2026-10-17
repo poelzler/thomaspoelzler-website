@@ -27,7 +27,8 @@ NAV = [
     ]),
     ("Research", "/research", [
         ("Interests", "/research/interests"),
-        ("Publications", "/research/publications"),
+        ("Books", "/research/books"),
+        ("Papers", "/research/papers"),
         ("Presentations", "/research/presentations"),
         ("Projects", "/research/projects"),
     ]),
@@ -53,11 +54,13 @@ PAGES = [
     {"path": "/about/contact", "src": "contact.html", "hero": "Contact", "title": "Thomas Pölzler - Contact",
      "description": "Contact Thomas Pölzler: e-mail, phone, postal address at the University of Graz and academic profiles."},
     {"path": "/research", "src": "research.html", "hero": "Research", "title": "Thomas Pölzler - Research",
-     "description": "Research of Thomas Pölzler: interests, publications, presentations and projects."},
+     "description": "Research of Thomas Pölzler: interests, books, papers, presentations and projects."},
     {"path": "/research/interests", "src": "interests.html", "hero": "Interests", "title": "Thomas Pölzler - Interests",
      "description": "Research interests of Thomas Pölzler: metaethics, empirical research on morality, political philosophy and Albert Camus."},
-    {"path": "/research/publications", "src": "publications.html", "hero": "Publications", "title": "Thomas Pölzler - Publications",
-     "description": "Publications by Thomas Pölzler: books, journal articles, chapters, edited volumes, reviews and op-eds on metaethics, moral psychology, basic needs and Albert Camus."},
+    {"path": "/research/books", "src": "books.html", "hero": "Books", "title": "Thomas Pölzler - Books",
+     "description": "Books by Thomas Pölzler: A Philosophical Perspective on Folk Moral Objectivism (Routledge 2022) and Moral Reality and the Empirical Sciences (Routledge 2018)."},
+    {"path": "/research/papers", "src": "papers.html", "hero": "Papers", "title": "Thomas Pölzler - Papers",
+     "description": "Papers by Thomas Pölzler: journal articles, chapters, edited volumes, commentaries, reviews and op-eds on metaethics, moral psychology, basic needs and Albert Camus."},
     {"path": "/research/presentations", "src": "presentations.html", "hero": "Presentations", "title": "Thomas Pölzler - Presentations",
      "description": "Talks and presentations by Thomas Pölzler at universities, conferences and workshops worldwide."},
     {"path": "/research/projects", "src": "projects.html", "hero": "Projects", "title": "Thomas Pölzler - Projects",
@@ -242,7 +245,7 @@ def build_site():
     doc = re.sub(r'<meta property="og:url"[^>]*>\n', "", doc)
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(doc)
     # Weiterleitungen und Sitemap für Cloudflare Pages
-    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n")
+    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n")
     urls = "".join("  <url><loc>%s%s</loc></url>\n" % (SITE_URL, p["path"]) for p in PAGES)
     open(os.path.join(OUT, "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % urls)

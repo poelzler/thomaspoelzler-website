@@ -245,11 +245,11 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .hero .bar { margin: 12px 0 0; }
   /* Publications: Abstände um die Überschriften werden bei schmaleren Fenstern etwas kleiner
      (gemessen bei 768 und 1440 px) */
-  .content.p-research-publications h2.sec {
+  .content.p-research-papers h2.sec {
     margin-top: min(44.16px, 43.16px + (100vw - 768px) / 672);
     margin-bottom: min(17.88px, 16.88px + (100vw - 768px) / 672);
   }
-  .content.p-research-publications .lead-s { padding-top: min(18px, 16px + (100vw - 768px) / 336); }
+  .content.p-research-papers .lead-s { padding-top: min(18px, 16px + (100vw - 768px) / 336); }
 }
 
 
@@ -274,8 +274,8 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 .content h2.sec.tight { margin-top: 25.66px; }
 .content h2.sec.hub { margin-top: 27.66px; }
-.content.p-research-publications h2.sec { margin-top: 44.16px; }
-.content > h2.sec:first-child, .content.p-research-publications > h2.sec:first-child { margin-top: -1.9px; }
+.content.p-research-papers h2.sec { margin-top: 44.16px; }
+.content > h2.sec:first-child, .content.p-research-papers > h2.sec:first-child { margin-top: -1.9px; }
 /* Unterüberschriften (18 pt), z. B. im Impressum */
 .content h3.sub {
   margin: 36.2px 0 17.3px;
@@ -286,17 +286,19 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .content h3.sub.x { margin-top: 45.2px; }
 .content.p-imprint p { padding-right: 19px; }
 .content .lead-s { padding-top: 18px; }
-/* Publications: Rezensionen grau; Buchcover links neben den Verlags- und Amazon-Links */
+/* Books: Cover links neben den bibliografischen Angaben und Links; Rezensionen grau */
 .content .reviews, .content .reviews a { color: var(--grey); }
-.content .book-links { display: flex; align-items: flex-start; margin: 0 0 16px; padding: 0 0 0 8px; }
-.content .book-links .cover {
+.content .book { display: flex; align-items: flex-start; margin: 0 0 16px; padding: 0 0 0 8px; }
+.content .book .cover {
   flex: none;
-  width: clamp(48px, 3vw + 36px, 84px);
+  width: clamp(64px, 4vw + 48px, 112px);
   height: auto;
   margin-top: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
 }
-.content .book-links p { margin: 0; padding: 0 8px 0 12px; }
+.content .book-info { min-width: 0; }
+.content .book-info p { padding: 0 8px 0 16px; }
+.content .book-info p:last-child { margin-bottom: 0; }
 .content .big-num { font-size: 18px; line-height: 0; }
 .content .big-num::after { content: ""; display: inline-block; height: 0; vertical-align: -9.3px; }
 
@@ -504,7 +506,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .content h2.sec.lg { font-size: 28px; }
   .content h2.sec.md { font-size: 27.5px; }
   .content h2.sec.tight { margin-top: 27.5px; }
-  .content > h2.sec:first-child, .content.p-research-publications > h2.sec:first-child { margin-top: -0.5px; }
+  .content > h2.sec:first-child, .content.p-research-papers > h2.sec:first-child { margin-top: -0.5px; }
   .content.p-about, .content.p-research, .content.p-teaching { padding-bottom: 57px; }
   /* Projects: Textfelder im Original am Handy schmaler */
   .content.p-research-projects p, .content.p-research-projects h2.sec { padding-right: 24px; }
