@@ -188,6 +188,9 @@ button svg { display: block; }
 .menu-open .scrim { opacity: .6; visibility: visible; transition: opacity .2s; }
 .search-open .scrim { opacity: .24; visibility: visible; transition: opacity .2s; }
 
+/* Kein blaues Aufleuchten beim Antippen von Links und Knöpfen (Android/iOS) */
+a, button { -webkit-tap-highlight-color: transparent; }
+
 /* ---------- Seitenmenü (nur Handy) ---------- */
 .drawer { display: none; }
 
