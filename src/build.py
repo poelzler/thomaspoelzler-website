@@ -43,7 +43,7 @@ NAV = [
 # Fertig nachgebaute Seiten: Pfad, Inhaltsdatei, Seitentitel im Titelbild, Beschreibung
 PAGES = [
     {"path": "/", "src": "start.html", "hero": "Welcome!", "title": "Thomas Pölzler – Philosopher, University of Graz",
-     "description": "I am a philosopher at the University of Graz, Austria. My research focuses on metaethics, moral psychology, experimental philosophy and basic needs."},
+     "description": "I am a philosopher at the University of Graz, Austria. My research focuses on metaethics, moral psychology, experimental philosophy, distributive justice and basic needs."},
     {"path": "/about", "src": "about.html", "hero": "About", "title": "Thomas Pölzler - About",
      "description": "About Thomas Pölzler, philosopher at the University of Graz, Austria: education, academic positions, grants and awards, and contact details."},
     {"path": "/about/education", "src": "education.html", "hero": "Education", "title": "Thomas Pölzler - Education",
@@ -55,7 +55,7 @@ PAGES = [
     {"path": "/about/contact", "src": "contact.html", "hero": "Contact", "title": "Thomas Pölzler - Contact",
      "description": "Contact Thomas Pölzler, Department of Philosophy, University of Graz: e-mail, phone, postal address and profiles on Google Scholar, PhilPeople and ResearchGate."},
     {"path": "/research", "src": "research.html", "hero": "Research", "title": "Thomas Pölzler - Research",
-     "description": "Research of philosopher Thomas Pölzler on metaethics, moral psychology, experimental philosophy and basic needs: books, papers, presentations and projects."},
+     "description": "Research of philosopher Thomas Pölzler on metaethics, moral psychology, experimental philosophy, distributive justice and basic needs: books, papers, presentations and projects."},
     {"path": "/research/interests", "src": "interests.html", "hero": "Interests", "title": "Thomas Pölzler - Interests",
      "description": "Research interests of Thomas Pölzler: metaethics, empirical research on morality, experimental philosophy, political philosophy, basic needs and Albert Camus."},
     {"path": "/research/books", "src": "books.html", "hero": "Books", "title": "Thomas Pölzler - Books",
@@ -215,7 +215,7 @@ PERSON_LD = {
     "url": SITE_URL + "/",
     "image": SITE_URL + "/img/portrait.jpg",
     "jobTitle": "Philosopher",
-    "description": "Philosopher at the University of Graz, Austria, working on metaethics, moral psychology, experimental philosophy and basic needs.",
+    "description": "Philosopher at the University of Graz, Austria, working on metaethics, moral psychology, experimental philosophy, distributive justice and basic needs.",
     "email": "mailto:thomas.poelzler@uni-graz.at",
     "worksFor": {"@type": "CollegeOrUniversity", "name": "University of Graz", "url": "https://www.uni-graz.at/en/"},
     "affiliation": {"@type": "CollegeOrUniversity", "name": "University of Graz", "url": "https://www.uni-graz.at/en/"},
