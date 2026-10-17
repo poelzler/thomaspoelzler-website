@@ -283,6 +283,17 @@ button svg { display: block; }
 .content h3.sub.x { margin-top: 45.2px; }
 .content.p-imprint p { padding-right: 19px; }
 .content .lead-s { padding-top: 18px; }
+/* Publications: Rezensionen grau; Buchcover links neben den Verlags- und Amazon-Links */
+.content .reviews, .content .reviews a { color: var(--grey); }
+.content .book-links { display: flex; align-items: flex-start; margin: 0 0 16px; padding: 0 0 0 8px; }
+.content .book-links .cover {
+  flex: none;
+  width: clamp(48px, 3vw + 36px, 84px);
+  height: auto;
+  margin-top: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+}
+.content .book-links p { margin: 0; padding: 0 8px 0 12px; }
 .content .big-num { font-size: 18px; line-height: 0; }
 .content .big-num::after { content: ""; display: inline-block; height: 0; vertical-align: -9.3px; }
 

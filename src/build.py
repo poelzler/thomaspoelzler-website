@@ -265,6 +265,8 @@ def build_preview():
            "/img/logo-unigraz.png": "data:image/png;base64," + b64(os.path.join(A, "img", "logo-unigraz.png"))}
     for f in sorted(os.listdir(os.path.join(A, "files", "cv"))):
         img["/files/cv/" + f] = "data:image/webp;base64," + b64(os.path.join(A, "files", "cv", f))
+    for f in sorted(os.listdir(os.path.join(A, "img", "books"))):
+        img["/img/books/" + f] = "data:image/jpeg;base64," + b64(os.path.join(A, "img", "books", f))
     for f in sorted(os.listdir(os.path.join(A, "img", "pictures"))):
         if f.endswith("-800.webp"):
             img["/img/pictures/" + f] = "data:image/webp;base64," + b64(os.path.join(A, "img", "pictures", f))
