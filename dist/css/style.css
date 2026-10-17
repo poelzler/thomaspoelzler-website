@@ -288,10 +288,11 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .content .lead-s { padding-top: 18px; }
 /* Books: Cover links neben den bibliografischen Angaben und Links; Rezensionen grau */
 .content .reviews, .content .reviews a { color: var(--grey); }
+.content.p-research-books .reviews { margin-top: 26px; }
 .content .book { display: flex; align-items: flex-start; margin: 0 0 16px; padding: 0 0 0 8px; }
 .content .book .cover {
   flex: none;
-  width: clamp(64px, 4vw + 48px, 112px);
+  width: clamp(72px, 4.5vw + 54px, 126px);
   height: auto;
   margin-top: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
