@@ -261,7 +261,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 /* Seiten, die im Original mit einer Leerzeile enden */
 .content.p-about-education, .content.p-about-contact, .content.p-research-interests,
 .content.p-about-positions, .content.p-research-projects { padding-bottom: 73px; }
-.content.p-teaching-materials { padding-bottom: 31px; }
 .content p { margin: 0 0 16px; padding: 0 8px; }
 .content > p:last-child { margin-bottom: 0; }
 
