@@ -315,7 +315,7 @@ def build_site():
     doc = re.sub(r'<meta property="og:url"[^>]*>\n', "", doc)
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(doc)
     # Weiterleitungen und Sitemap für Cloudflare Pages
-    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n")
+    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
     urls = "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, p["path"], "<lastmod>%s</lastmod>" % lastmod(p) if lastmod(p) else "")
                    for p in PAGES)
     # Die Vorschau-Adressen bei Cloudflare (pages.dev) sollen nicht in Google erscheinen, nur die eigene Domain
