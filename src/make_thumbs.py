@@ -1,4 +1,4 @@
-"""Vorschaubilder (erste PDF-Seite) für die Einzelseiten der Papers.
+"""Vorschaubilder (erste PDF-Seite bzw. Verlags-Deckblatt aus src/covers) für die Einzelseiten der Papers.
 
 Aufruf nach Änderungen an den PDFs: python3 src/make_thumbs.py  (braucht PyMuPDF und Pillow)
 """
@@ -21,7 +21,10 @@ for e in papers.load():
         continue
     out = os.path.join(DEST, e["slug"] + ".jpg")
     keep.add(os.path.basename(out))
-    page = pymupdf.open(os.path.join(ROOT, "assets", "files", "papers", e["pdf"]))[0]
+    # Wo der Verlag ein Deckblatt mit Zeitschriften- oder Buchcover hat(te), wird dieses gezeigt
+    cover = os.path.join(ROOT, "covers", e["slug"] + ".pdf")
+    src = cover if os.path.exists(cover) else os.path.join(ROOT, "assets", "files", "papers", e["pdf"])
+    page = pymupdf.open(src)[0]
     pm = page.get_pixmap(matrix=pymupdf.Matrix(WIDTH * 2 / page.rect.width, WIDTH * 2 / page.rect.width), alpha=False)
     img = Image.open(io.BytesIO(pm.tobytes("png"))).convert("RGB")
     img = img.resize((WIDTH, round(img.height * WIDTH / img.width)), Image.LANCZOS)
