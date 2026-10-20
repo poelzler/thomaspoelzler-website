@@ -12,6 +12,8 @@ import os
 import re
 import shutil
 
+import papers
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "..", "dist")
 PREVIEW = os.path.join(ROOT, "..", "preview")
@@ -53,14 +55,14 @@ PAGES = [
     {"path": "/about/grants-awards", "src": "grants-awards.html", "hero": "Grants & Awards", "title": "Thomas Pölzler - Grants & Awards",
      "description": "Grants and awards of Thomas Pölzler, including a Marie Skłodowska-Curie Global Fellowship, the Wolfgang Stegmüller Award and a JSPS Postdoctoral Fellowship."},
     {"path": "/about/contact", "src": "contact.html", "hero": "Contact", "title": "Thomas Pölzler - Contact",
-     "description": "Contact Thomas Pölzler, Department of Philosophy, University of Graz: e-mail, phone, postal address and profiles on Google Scholar, PhilPeople and ResearchGate."},
+     "description": "Contact Thomas Pölzler, Department of Philosophy, University of Graz: e-mail, phone, postal address and profiles on Google Scholar, PhilPeople, ORCID and ResearchGate."},
     {"path": "/research", "src": "research.html", "hero": "Research", "title": "Thomas Pölzler - Research",
      "description": "Research of philosopher Thomas Pölzler on metaethics, moral psychology, experimental philosophy, distributive justice and basic needs: books, papers, presentations and projects."},
     {"path": "/research/interests", "src": "interests.html", "hero": "Interests", "title": "Thomas Pölzler - Interests",
      "description": "Research interests of Thomas Pölzler: metaethics, empirical research on morality, experimental philosophy, political philosophy, basic needs and Albert Camus."},
     {"path": "/research/books", "src": "books.html", "hero": "Books", "title": "Thomas Pölzler - Books",
      "description": "Books by Thomas Pölzler: A Philosophical Perspective on Folk Moral Objectivism (Routledge 2022) and Moral Reality and the Empirical Sciences (Routledge 2018)."},
-    {"path": "/research/papers", "src": "papers.html", "hero": "Papers", "title": "Thomas Pölzler - Papers",
+    {"path": "/research/papers", "src": "../papers_data.json", "gen": "papers", "hero": "Papers", "title": "Thomas Pölzler - Papers",
      "description": "Papers by Thomas Pölzler on metaethics, moral psychology, experimental philosophy, basic needs and Albert Camus: journal articles, chapters, reviews and op-eds."},
     {"path": "/research/presentations", "src": "presentations.html", "hero": "Presentations", "title": "Thomas Pölzler - Presentations",
      "description": "Talks by Thomas Pölzler on metaethics, folk moral objectivism, basic needs and experimental philosophy at universities, conferences and workshops worldwide."},
@@ -228,9 +230,9 @@ PERSON_LD = {
               "JSPS Postdoctoral Fellowship"],
     "sameAs": [
         "https://scholar.google.at/citations?user=pPmGiWUAAAAJ",
-        "https://www.researchgate.net/profile/Thomas_Poelzler/",
-        "https://uni-graz.academia.edu/ThomasP%C3%B6lzler",
         "https://philpeople.org/profiles/thomas-polzler",
+        "https://orcid.org/0000-0002-4311-0897",
+        "https://www.researchgate.net/profile/Thomas_Poelzler/",
     ],
 }
 PERSON_REF = {"@id": SITE_URL + "/#person"}
@@ -291,19 +293,44 @@ def out_file(path):
     return path.strip("/") + ".html"
 
 
+def page_body(page):
+    if page.get("gen") == "papers":
+        return papers.list_html()
+    return open(os.path.join(ROOT, "pages", page["src"]), encoding="utf-8").read()
+
+
+def build_paper_pages(css):
+    """Eine Seite pro Eintrag der Papers-Seite; nur über die Sitemap auffindbar, nicht verlinkt."""
+    E = papers.load()
+    by_title = {papers.plain(e["title"]): e for e in E}
+    for e in E:
+        desc = papers.describe(e)
+        pg = {"path": e["path"], "hero": "Papers", "title": papers.plain(e["title"]) + " – Thomas Pölzler", "description": desc}
+        extra = papers.meta_tags(e, SITE_URL) + papers.json_ld(e, SITE_URL, PERSON_REF, desc)
+        doc = (head(pg, css, extra) + "<body>\n" + chrome_top("/research/papers")
+               + main_block(dict(pg, path="/research/paper"), papers.page_html(e, by_title))
+               + FOOTER + '<script src="/js/site.js" defer></script>\n</body>\n</html>\n')
+        doc = doc.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">', 1)
+        dest = os.path.join(OUT, out_file(e["path"]))
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        open(dest, "w", encoding="utf-8").write(doc)
+    return E
+
+
 def build_site():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     shutil.copytree(os.path.join(ROOT, "assets"), OUT)
     css = '<link rel="stylesheet" href="/css/fonts.css">\n<link rel="stylesheet" href="/css/style.css">\n'
     for page in PAGES:
-        body = open(os.path.join(ROOT, "pages", page["src"]), encoding="utf-8").read()
+        body = page_body(page)
         extra = structured_data(page)
         doc = (head(page, css, extra) + "<body>\n" + chrome_top(page["path"]) + main_block(page, body)
                + FOOTER + '<script src="/js/site.js" defer></script>\n</body>\n</html>\n')
         dest = os.path.join(OUT, out_file(page["path"]))
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, "w", encoding="utf-8").write(doc)
+    paper_entries = build_paper_pages(css)
     # Fehlerseite: ohne sie würde Cloudflare Pages bei unbekannten Adressen die Startseite ausliefern
     nf = {"path": "/404", "hero": "Page not found", "title": "Thomas Pölzler - Page not found",
           "description": "This page could not be found."}
@@ -318,6 +345,9 @@ def build_site():
     open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
     urls = "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, p["path"], "<lastmod>%s</lastmod>" % lastmod(p) if lastmod(p) else "")
                    for p in PAGES)
+    data_mod = lastmod({"src": os.path.join("..", "papers_data.json")})
+    urls += "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, e["path"], "<lastmod>%s</lastmod>" % data_mod if data_mod else "")
+                    for e in paper_entries)
     # Die Vorschau-Adressen bei Cloudflare (pages.dev) sollen nicht in Google erscheinen, nur die eigene Domain
     open(os.path.join(OUT, "_headers"), "w").write(
         "https://thomaspoelzler.pages.dev/*\n  X-Robots-Tag: noindex\n"
@@ -358,7 +388,7 @@ def build_preview():
 
     built = {}
     for page in PAGES:
-        body = open(os.path.join(ROOT, "pages", page["src"]), encoding="utf-8").read()
+        body = page_body(page)
         built[page["path"]] = {"title": page["title"], "hero": page["hero"], "html": localize(body), "cls": slug(page["path"])}
     first = PAGES[0]
     templates = "".join(

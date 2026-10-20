@@ -574,3 +574,20 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .pdf-card-name { display: flex; align-items: center; gap: 10px; height: 48px; margin-top: 9px; padding: 0 13px; background: #f2f2f2; font: 400 16px/1 var(--head); }
   .pdf-card-name svg { flex: 0 0 22px; fill: #d93025; }
 }
+
+/* ---------- Einzelseiten der Papers (nur über Suchmaschinen erreichbar) ---------- */
+.content h2.sec.paper { margin-top: -1.9px; font-size: 30px; line-height: 1.35; }
+.content .paper-cite .up { font-style: normal; }
+.content .paper-note { color: var(--grey); }
+.content .paper-links {
+  display: inline-block;
+  margin: 6px 0 8px 8px;
+  padding: 9px 16px;
+  background: #f1f1f1;
+}
+.content .paper-links .gap { display: inline-block; width: 32px; }
+.content h3.sub.paper-abs { margin-top: 30px; }
+@media (max-width: 767px) {
+  .content h2.sec.paper { font-size: 24px; margin-top: -0.5px; }
+  .content .paper-links .gap { display: block; width: 0; height: 4px; }
+}
