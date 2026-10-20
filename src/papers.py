@@ -71,7 +71,7 @@ def links(e, by_title):
         out.append('&gt; <a href="%s">Download</a>' % pdf_url(e["pdf"]))
     url = e.get("url") or ("https://doi.org/" + e["doi"] if e.get("doi") else None)
     if url:
-        out.append('&gt; <a href="%s">Published Version</a>' % html.escape(url))
+        out.append('&gt; <a href="%s">Online Version</a>' % html.escape(url))
     return out
 
 
@@ -206,6 +206,9 @@ def json_ld(e, site, person_ref, desc):
         {"@context": "https://schema.org", "@graph": [page, w, bc]}, ensure_ascii=False)
 
 
+THUMBS = os.path.join(ROOT, "papers_thumbs.json")
+
+
 def page_html(e, by_title):
     lang = ' lang="de"' if e.get("lang") == "de" else ""
     out = ['    <h2 class="sec paper"%s>%s</h2>' % (lang, esc(e["title"]))]
@@ -215,13 +218,25 @@ def page_html(e, by_title):
     if e.get("note"):
         out.append('    <p class="paper-note">%s</p>' % resolve(e["note"], by_title))
     L = links(e, by_title)
-    if L:
-        out.append('    <p class="paper-links">%s</p>' % '<span class="gap"></span>'.join(L))
+    size = json.load(open(THUMBS)).get(e["slug"]) if os.path.exists(THUMBS) else None
+    if size and e.get("pdf"):
+        # Vorschaubild der ersten Seite, daneben die Links (wie die Cover auf der Seite Books)
+        out.append('    <div class="book paper-box">')
+        out.append('      <a class="nu" href="%s"><img class="cover" src="/img/papers/%s.jpg" width="%d" height="%d" alt="First page of the PDF" loading="lazy"></a>'
+                   % (pdf_url(e["pdf"]), e["slug"], size[0], size[1]))
+        out.append('      <div class="book-info"><p>%s</p></div>' % "<br>".join(L))
+        out.append('    </div>')
+    elif L:
+        out.append('    <p class="paper-links">%s</p>' % "<br>".join(L))
     ab = e.get("abstract")
     if ab:
         al = e.get("abstract_lang", e.get("lang", "en"))
         alang = ' lang="de"' if al == "de" else ""
-        out.append('    <h3 class="sub paper-abs">Abstract</h3>')
-        for para in (ab if isinstance(ab, list) else [ab]):
-            out.append("    <p%s>%s</p>" % (alang, esc(para)))
+        for k, para in enumerate(ab if isinstance(ab, list) else [ab]):
+            out.append("    <p class=\"paper-abs\"%s>%s%s</p>" % (alang, "Abstract: " if k == 0 else "", esc(para)))
     return "\n".join(out) + "\n"
+
+
+def thumb(e):
+    size = json.load(open(THUMBS)).get(e["slug"]) if os.path.exists(THUMBS) else None
+    return ("/img/papers/%s.jpg" % e["slug"], size) if size and e.get("pdf") else (None, None)

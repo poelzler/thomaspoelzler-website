@@ -311,6 +311,11 @@ def build_paper_pages(css):
                + main_block(dict(pg, path="/research/paper"), papers.page_html(e, by_title))
                + FOOTER + '<script src="/js/site.js" defer></script>\n</body>\n</html>\n')
         doc = doc.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">', 1)
+        img, size = papers.thumb(e)
+        if img:  # Vorschaubild der ersten Seite auch für geteilte Links
+            doc = re.sub(r'<meta property="og:image" content="[^"]*">\n<meta property="og:image:width" content="\d+">\n<meta property="og:image:height" content="\d+">\n<meta property="og:image:alt" content="[^"]*">\n<meta name="twitter:card" content="summary_large_image">',
+                         '<meta property="og:image" content="%s%s">\n<meta property="og:image:width" content="%d">\n<meta property="og:image:height" content="%d">\n<meta property="og:image:alt" content="First page of the PDF">\n<meta name="twitter:card" content="summary">'
+                         % (SITE_URL, img, size[0], size[1]), doc, count=1)
         dest = os.path.join(OUT, out_file(e["path"]))
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, "w", encoding="utf-8").write(doc)

@@ -579,15 +579,9 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .content h2.sec.paper { margin-top: -1.9px; font-size: 30px; line-height: 1.35; }
 .content .paper-cite .up { font-style: normal; }
 .content .paper-note { color: var(--grey); }
-.content .paper-links {
-  display: inline-block;
-  margin: 6px 0 8px 8px;
-  padding: 9px 16px;
-  background: #f1f1f1;
-}
-.content .paper-links .gap { display: inline-block; width: 32px; }
-.content h3.sub.paper-abs { margin-top: 30px; }
+/* Vorschaubild und Links wie bei den Covern auf der Seite Books */
+.content .paper-box { margin: 22px 0 26px; }
+.content .paper-box .book-info p { margin-top: 0; }
 @media (max-width: 767px) {
   .content h2.sec.paper { font-size: 24px; margin-top: -0.5px; }
-  .content .paper-links .gap { display: block; width: 0; height: 4px; }
 }
