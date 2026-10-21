@@ -16,13 +16,15 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: lig
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   margin: 0;
   background: #fff;
   color: var(--ink);
   font: 400 16px/1.56 var(--sans);
 }
 main { flex: 1 0 auto; }
+/* Kurze Seiten: Fußzeile am unteren Fensterrand, aber nur bei Querformat (Computer). Im Hochformat
+   (Handy im Desktopmodus, Tablet) folgt die Fußzeile direkt auf den Inhalt. */
+@media (orientation: landscape) { body { min-height: 100vh; } }
 body.lock { overflow: hidden; }
 
 a { color: inherit; text-decoration: underline; }
