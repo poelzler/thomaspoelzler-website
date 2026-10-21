@@ -514,6 +514,25 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .hero .bar { top: 204px; }
 
   .carousel { width: 100%; margin-top: 58.8px; }
+
+  .site-footer .page { padding: 36px 8px 34px; }
+  .site-footer .name { font-size: 26.67px; line-height: 32px; }
+  .site-footer .links { font-size: 20px; line-height: 30.67px; }
+  .site-footer .name + .links { margin-top: 24px; }
+}
+
+@keyframes spin-out { to { transform: rotate(720deg); } }
+@keyframes spin-in { from { transform: rotate(-540deg); } to { transform: rotate(0deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer, .scrim, .toggle svg { transition: none !important; }
+  .menu-btn svg, .drawer-close svg { animation: none !important; }
+  .menu-open .site-header { transition: none; }
+  .car-track { scroll-behavior: auto; }
+}
+
+/* Schmale Handy-Ansicht: Lebenslauf als Vorschaukarte; ab 600 px der durchblätterbare Betrachter */
+@media (max-width: 599px) {
   .embed-pdf { display: none; }
   .pdf-card {
     display: block;
@@ -539,39 +558,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .pdf-card-name svg { flex: 0 0 22px; fill: #d93025; }
-
-  .site-footer .page { padding: 36px 8px 34px; }
-  .site-footer .name { font-size: 26.67px; line-height: 32px; }
-  .site-footer .links { font-size: 20px; line-height: 30.67px; }
-  .site-footer .name + .links { margin-top: 24px; }
-}
-
-@keyframes spin-out { to { transform: rotate(720deg); } }
-@keyframes spin-in { from { transform: rotate(-540deg); } to { transform: rotate(0deg); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .drawer, .scrim, .toggle svg { transition: none !important; }
-  .menu-btn svg, .drawer-close svg { animation: none !important; }
-  .menu-open .site-header { transition: none; }
-  .car-track { scroll-behavior: auto; }
-}
-
-/* Tablet: Lebenslauf als Vorschaukarte wie am Handy (das Original zeigt hier keinen großen Betrachter) */
-@media (min-width: 768px) and (max-width: 1279px) {
-  .embed-pdf { display: none; }
-  .pdf-card {
-    display: block;
-    margin: 55.8px 0 39px;
-    border: 1px solid #e3e3e3;
-    background: #000;
-    padding-top: 9px;
-    color: #202124;
-    text-decoration: none;
-  }
-  .pdf-card-prev { display: block; height: 215px; overflow: hidden; background: #fff; }
-  .pdf-card-prev img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-  .pdf-card-name { display: flex; align-items: center; gap: 10px; height: 48px; margin-top: 9px; padding: 0 13px; background: #f2f2f2; font: 400 16px/1 var(--head); }
   .pdf-card-name svg { flex: 0 0 22px; fill: #d93025; }
 }
 
