@@ -8,6 +8,9 @@ Quelldateien der persönlichen Website von Thomas Pölzler.
 - `src/assets/` – Stylesheets, Schriften, Bilder, Skript, Lebenslauf (PDF)
 - `src/build.py` – setzt Vorlage und Inhalte zu fertigen Seiten zusammen (nur Python-Standardbibliothek)
 - `dist/` – fertige Website, die Cloudflare Pages ausliefert
+- `cv/` – Word-Hauptdatei des Lebenslaufs; `tools/cv_build.py` erzeugt daraus PDF und Seitenbilder
+- `tools/paper_pdf/` – Werkzeuge für selbst gesetzte Publikations-PDFs
+- `CLAUDE.md` – ausführliche Arbeitsanleitung
 
 ## Neu bauen
 
