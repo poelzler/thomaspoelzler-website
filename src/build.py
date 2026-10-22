@@ -346,6 +346,21 @@ def build_site():
     doc = re.sub(r'<link rel="canonical"[^>]*>\n', '<meta name="robots" content="noindex">\n', doc)
     doc = re.sub(r'<meta property="og:url"[^>]*>\n', "", doc)
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(doc)
+    # Versionsnummer an CSS/JS anhängen, damit Browser nach Änderungen sofort die neue Datei laden
+    import hashlib
+    ver = {}
+    for rel in ("css/style.css", "css/fonts.css", "js/site.js"):
+        ver["/" + rel] = hashlib.md5(open(os.path.join(OUT, rel), "rb").read()).hexdigest()[:8]
+    for dp, _, fs in os.walk(OUT):
+        for f in fs:
+            if f.endswith(".html"):
+                fp = os.path.join(dp, f)
+                t = open(fp, encoding="utf-8").read()
+                t2 = t
+                for url, v in ver.items():
+                    t2 = t2.replace('"' + url + '"', '"' + url + "?v=" + v + '"')
+                if t2 != t:
+                    open(fp, "w", encoding="utf-8").write(t2)
     # Weiterleitungen und Sitemap für Cloudflare Pages
     open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
     urls = "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, p["path"], "<lastmod>%s</lastmod>" % lastmod(p) if lastmod(p) else "")
