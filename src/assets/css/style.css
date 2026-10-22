@@ -27,9 +27,10 @@ main { flex: 1 0 auto; }
 @media (orientation: landscape) { body { min-height: 100vh; } }
 body.lock { overflow: hidden; }
 
-a { color: inherit; text-decoration: underline; }
+/* Feste Strichstärke: Firefox nimmt sonst den sehr dünnen Wert aus der Schrift (0,4 px) */
+a { color: inherit; text-decoration: underline; text-decoration-thickness: max(1px, 0.0625em); }
 a.nu { text-decoration: none; }
-.u { text-decoration: underline; }
+.u { text-decoration: underline; text-decoration-thickness: max(1px, 0.0625em); }
 
 button { font: inherit; color: inherit; }
 button svg { display: block; }
@@ -353,7 +354,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   width: calc(100% * 72.5 / 97.5);
   min-height: 0;
   aspect-ratio: 1.381 / 1;
-  margin: 30px auto -39.3px;   /* zentriert (im Original rechtsbündig) */
+  margin: 30px auto -19.3px;   /* zentriert (im Original rechtsbündig) */
 }
 .car-track {
   display: flex;
