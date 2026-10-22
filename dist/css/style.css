@@ -310,7 +310,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   /* Höhe passt sich dem Fenster an (sichtbarer Bereich unter der Kopfleiste), mindestens 498 px */
   height: max(498px, calc(100vh - var(--bar-h) - 48px));
   height: max(498px, calc(100dvh - var(--bar-h) - 48px));
-  margin: 55.8px 0 39px;
+  margin: 36px 0 39px;
   background: #e8eaed;
   overflow: hidden;
 }
@@ -541,7 +541,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .embed-pdf { display: none; }
   .pdf-card {
     display: block;
-    margin: 55px 0 39px;
+    margin: 36px 0 39px;
     border: 1px solid #e3e3e3;
     background: #e8eaed;
     padding-top: 9px;
