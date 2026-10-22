@@ -353,7 +353,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   width: calc(100% * 72.5 / 97.5);
   min-height: 0;
   aspect-ratio: 1.381 / 1;
-  margin: 55.4px auto 16px;   /* zentriert (im Original rechtsbündig) */
+  margin: 30px auto -12px;   /* zentriert (im Original rechtsbündig) */
 }
 .car-track {
   display: flex;
@@ -383,7 +383,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 .car-btn {
   position: absolute;
-  top: 50%;
+  top: calc((100% - 25.4px) / 2);   /* Mitte des Bildes (ohne die leere Zeile darunter) */
   display: grid;
   place-items: center;
   width: 48px;
@@ -518,7 +518,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .hero h1 { top: 148px; font-size: 40px; }
   .hero .bar { top: 204px; }
 
-  .carousel { width: 100%; margin-top: 58.8px; }
+  .carousel { width: 100%; margin-top: 32px; }
 
   .site-footer .page { padding: 36px 8px 34px; }
   .site-footer .name { font-size: 26.67px; line-height: 32px; }
