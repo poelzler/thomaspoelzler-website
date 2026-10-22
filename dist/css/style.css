@@ -353,7 +353,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   width: calc(100% * 72.5 / 97.5);
   min-height: 0;
   aspect-ratio: 1.381 / 1;
-  margin: 30px auto -12px;   /* zentriert (im Original rechtsbündig) */
+  margin: 30px auto -39.3px;   /* zentriert (im Original rechtsbündig) */
 }
 .car-track {
   display: flex;
