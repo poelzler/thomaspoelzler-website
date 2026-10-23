@@ -345,13 +345,13 @@ a, button { -webkit-tap-highlight-color: transparent; }
 /* Kompakte Vorschaukarte am Handy (wie die Drive-Einbettung im Original) */
 .pdf-card { display: none; }
 
-/* Bilderkarussell (Pictures): Kachel über 9 von 12 Spalten, Seitenverhältnis 1,381 einschließlich
+/* Bilderkarussell (Pictures): volle Breite des Textbereichs, Seitenverhältnis 1,381 einschließlich
    einer leeren Zeile für Bildunterschriften; Pfeile erscheinen beim Darüberfahren oder Antippen */
 .carousel {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: calc(100% * 72.5 / 97.5);
+  width: calc(100% - 16px);   /* bündig mit dem Text (Absätze haben 8 px Innenabstand) */
   min-height: 0;
   aspect-ratio: 1.381 / 1;
   margin: 30px auto -19.3px;   /* zentriert (im Original rechtsbündig) */
@@ -519,7 +519,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .hero h1 { top: 148px; font-size: 40px; }
   .hero .bar { top: 204px; }
 
-  .carousel { width: 100%; margin-top: 32px; }
+  .carousel { margin-top: 32px; }
 
   .site-footer .page { padding: 36px 8px 34px; }
   .site-footer .name { font-size: 26.67px; line-height: 32px; }
