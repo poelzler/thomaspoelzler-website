@@ -1110,7 +1110,8 @@
   "lang": "de",
   "authors": [
    "Pölzler, Thomas"
-  ]
+  ],
+  "noindex": true
  },
  {
   "sec": "Op-eds, Blog Posts, etc.",
@@ -1125,7 +1126,8 @@
   "lang": "en",
   "authors": [
    "Pölzler, Thomas"
-  ]
+  ],
+  "noindex": true
  },
  {
   "sec": "Op-eds, Blog Posts, etc.",
@@ -1156,7 +1158,8 @@
   "lang": "de",
   "authors": [
    "Pölzler, Thomas"
-  ]
+  ],
+  "noindex": true
  },
  {
   "sec": "Op-eds, Blog Posts, etc.",
