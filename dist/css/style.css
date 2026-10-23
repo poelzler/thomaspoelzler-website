@@ -22,9 +22,9 @@ body {
   font: 400 16px/1.56 var(--sans);
 }
 main { flex: 1 0 auto; }
-/* Kurze Seiten: Fußzeile am unteren Fensterrand, aber nur bei Querformat (Computer). Im Hochformat
-   (Handy im Desktopmodus, Tablet) folgt die Fußzeile direkt auf den Inhalt. */
-@media (orientation: landscape) { body { min-height: 100vh; } }
+/* Kurze Seiten: Fußzeile immer am unteren Fensterrand, auch im Hochformat (Handy, Tablet, Desktopmodus).
+   svh = Fensterhöhe bei eingeblendeter Adressleiste, damit die Fußzeile am Handy nicht darunter verschwindet. */
+body { min-height: 100vh; min-height: 100svh; }
 body.lock { overflow: hidden; }
 
 /* Feste Strichstärke: Firefox nimmt sonst den sehr dünnen Wert aus der Schrift (0,4 px) */
