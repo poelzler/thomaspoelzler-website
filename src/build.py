@@ -45,7 +45,7 @@ NAV = [
 # Fertig nachgebaute Seiten: Pfad, Inhaltsdatei, Seitentitel im Titelbild, Beschreibung
 PAGES = [
     {"path": "/", "src": "start.html", "hero": "Welcome!", "title": "Thomas Pölzler, University of Graz",
-     "description": "I am a philosopher at the University of Graz, Austria. My research focuses on metaethics, moral psychology, experimental philosophy, distributive justice and basic needs."},
+     "description": "I am a researcher at the University of Graz, Austria. My main areas of specialization are metaethics and moral psychology."},
     {"path": "/about", "src": "about.html", "hero": "About", "title": "Thomas Pölzler - About",
      "description": "About Thomas Pölzler, philosopher at the University of Graz, Austria: education, academic positions, grants and awards, and contact details."},
     {"path": "/about/education", "src": "education.html", "hero": "Education", "title": "Thomas Pölzler - Education",
@@ -305,7 +305,7 @@ def build_paper_pages(css):
     by_title = {papers.plain(e["title"]): e for e in E}
     for e in E:
         desc = papers.describe(e)
-        pg = {"path": e["path"], "hero": "Papers", "title": papers.plain(e["title"]) + " – Thomas Pölzler", "description": desc}
+        pg = {"path": e["path"], "hero": "Papers", "title": papers.plain(e["title"]), "description": desc}  # ohne Namen: Einzelseiten sollen über ihr Thema gefunden werden, nicht über den Namen
         extra = papers.meta_tags(e, SITE_URL) + papers.json_ld(e, SITE_URL, PERSON_REF, desc)
         doc = (head(pg, css, extra) + "<body>\n" + chrome_top("/research/papers")
                + main_block(dict(pg, path="/research/paper"), papers.page_html(e, by_title))
@@ -316,6 +316,8 @@ def build_paper_pages(css):
             doc = re.sub(r'<meta property="og:image" content="[^"]*">\n<meta property="og:image:width" content="\d+">\n<meta property="og:image:height" content="\d+">\n<meta property="og:image:alt" content="[^"]*">\n<meta name="twitter:card" content="summary_large_image">',
                          '<meta property="og:image" content="%s%s">\n<meta property="og:image:width" content="%d">\n<meta property="og:image:height" content="%d">\n<meta property="og:image:alt" content="First page of the PDF">\n<meta name="twitter:card" content="summary">'
                          % (SITE_URL, img, size[0], size[1]), doc, count=1)
+        if e.get("noindex"):  # nicht in Google aufnehmen
+            doc = doc.replace('<meta charset="utf-8">\n', '<meta charset="utf-8">\n<meta name="robots" content="noindex">\n', 1)
         dest = os.path.join(OUT, out_file(e["path"]))
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, "w", encoding="utf-8").write(doc)
@@ -367,7 +369,7 @@ def build_site():
                    for p in PAGES)
     data_mod = lastmod({"src": os.path.join("..", "papers_data.json")})
     urls += "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, e["path"], "<lastmod>%s</lastmod>" % data_mod if data_mod else "")
-                    for e in paper_entries)
+                    for e in paper_entries if not e.get("noindex"))
     # Die Vorschau-Adressen bei Cloudflare (pages.dev) sollen nicht in Google erscheinen, nur die eigene Domain
     open(os.path.join(OUT, "_headers"), "w").write(
         "https://thomaspoelzler.pages.dev/*\n  X-Robots-Tag: noindex\n"

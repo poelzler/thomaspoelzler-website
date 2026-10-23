@@ -116,7 +116,7 @@ def describe(e):
         return t
     venue = plain(re.sub(r"\.\s*\d{4}\.\s*$", "", e["venue"])) if e.get("venue") else ""
     kind = LABEL.get(e.get("sec"), "Article").lower()
-    lead = "%s by Thomas Pölzler" % kind.capitalize()
+    lead = kind.capitalize()
     if venue:
         lead += " in " + venue.rstrip(".")
     return "%s (%s). %s" % (lead, e["year"], "Download the PDF." if e.get("pdf") else "")
