@@ -169,7 +169,7 @@ FOOTER = (
     '<footer class="site-footer">\n'
     '  <div class="page">\n'
     '    <p class="name">Thomas Pölzler</p>\n'
-    '    <p class="links"><a href="https://philosophie-gewi.uni-graz.at/en/section-moral-and-political-philosophy/">Section Moral and Political Philosophy</a> | <a href="https://www.uni-graz.at/en/">University of Graz</a> | <a href="/imprint">Imprint</a></p>\n'
+    '    <p class="links"><a href="https://philosophie-gewi.uni-graz.at/en/sections/moral-and-political-philosophy/">Section Moral and Political Philosophy</a> | <a href="https://www.uni-graz.at/en/">University of Graz</a> | <a href="/imprint">Imprint</a></p>\n'
     '    <p class="links"><a href="mailto:thomas.poelzler@uni-graz.at">thomas.poelzler(at)uni-graz.at</a></p>\n'
     '  </div>\n'
     '</footer>\n'
