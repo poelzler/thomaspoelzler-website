@@ -370,6 +370,13 @@ def build_site():
     data_mod = lastmod({"src": os.path.join("..", "papers_data.json")})
     urls += "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, e["path"], "<lastmod>%s</lastmod>" % data_mod if data_mod else "")
                     for e in paper_entries if not e.get("noindex"))
+    # Alte Adressen der Kurs-PDFs (früher mit „Syllabus “ am Anfang des Dateinamens) weiterleiten
+    from urllib.parse import quote
+    red = ""
+    for f in sorted(os.listdir(os.path.join(OUT, "files", "courses"))):
+        for safe in ("()", ""):
+            red += "/files/courses/%s /files/courses/%s 301\n" % (quote("Syllabus " + f, safe=safe), quote(f, safe=safe))
+    open(os.path.join(OUT, "_redirects"), "a").write(red)
     # Die Vorschau-Adressen bei Cloudflare (pages.dev) sollen nicht in Google erscheinen, nur die eigene Domain
     open(os.path.join(OUT, "_headers"), "w").write(
         "https://thomaspoelzler.pages.dev/*\n  X-Robots-Tag: noindex\n"
