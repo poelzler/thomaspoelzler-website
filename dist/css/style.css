@@ -382,23 +382,34 @@ a, button { -webkit-tap-highlight-color: transparent; }
   filter: blur(24px) brightness(.75);
   transform: scale(1.15);
 }
+/* Schaltflächen: der ganze linke bzw. rechte Rand des Bildes (Streifen in voller Bildhöhe) schaltet weiter;
+   der sichtbare Kreis mit dem Pfeil sitzt in der Mitte des Streifens am Rand */
 .car-btn {
   position: absolute;
-  top: calc((100% - 25.4px) / 2);   /* Mitte des Bildes (ohne die leere Zeile darunter) */
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-top: -24px;
-  padding: 0;
+  top: 0;
+  bottom: 25.4px;   /* ohne die leere Zeile unter dem Bild */
+  display: flex;
+  align-items: center;
+  width: max(80px, 20%);
+  padding: 0 10px;
   border: 0;
-  border-radius: 50%;
-  background: rgba(20, 20, 20, .7);
+  background: transparent;
   cursor: pointer;
   opacity: 0;
   transition: opacity .2s;
+  -webkit-tap-highlight-color: transparent;
 }
-.car-btn svg { fill: #fff; }
+.car-btn svg {
+  box-sizing: content-box;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, .7);
+  fill: #fff;
+}
+.car-btn:focus-visible { outline: none; }
+.car-btn:focus-visible svg { outline: 2px solid #fff; outline-offset: 2px; }
 /* Mit Maus: beim Darüberfahren; mit Tastatur: solange ein Element den Fokus hat;
    am Handy: nach dem Antippen für drei Sekunden (Klasse .ctrl, per Skript) */
 .carousel.ctrl .car-btn,
@@ -406,8 +417,10 @@ a, button { -webkit-tap-highlight-color: transparent; }
 @media (hover: hover) and (pointer: fine) {
   .carousel:hover .car-btn { opacity: 1; }
 }
-.car-prev { left: 10px; }
-.car-next { right: 10px; }
+/* Touchgeräte: schmalere Streifen, damit das Wischen über das Bild fast überall funktioniert */
+@media (hover: none), (pointer: coarse) { .car-btn { width: 64px; } }
+.car-prev { left: 0; justify-content: flex-start; }
+.car-next { right: 0; justify-content: flex-end; }
 
 .portrait { margin: 32px 0 29px; }
 .portrait img { display: block; width: 100%; height: auto; }
