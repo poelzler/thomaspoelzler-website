@@ -417,8 +417,11 @@ a, button { -webkit-tap-highlight-color: transparent; }
 @media (hover: hover) and (pointer: fine) {
   .carousel:hover .car-btn { opacity: 1; }
 }
-/* Touchgeräte: schmalere Streifen, damit das Wischen über das Bild fast überall funktioniert */
-@media (hover: none), (pointer: coarse) { .car-btn { width: 64px; } }
+/* Touchgeräte (Handy, Tablet): nur der Kreis mit dem Pfeil schaltet weiter, sonst kann überall gewischt werden */
+@media (hover: none), (pointer: coarse) {
+  .car-btn { pointer-events: none; }
+  .car-btn svg { pointer-events: auto; }
+}
 .car-prev { left: 0; justify-content: flex-start; }
 .car-next { right: 0; justify-content: flex-end; }
 
