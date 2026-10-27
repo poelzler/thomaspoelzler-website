@@ -337,7 +337,8 @@ def build_site():
         dest = os.path.join(OUT, out_file(page["path"]))
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, "w", encoding="utf-8").write(doc)
-    paper_entries = build_paper_pages(css)
+    # Einzelseiten der Papers werden seit 10/2026 nicht mehr erzeugt (build_paper_pages bleibt für später erhalten);
+    # alte Adressen /research/papers/<slug> leiten auf die Papers-Seite weiter (siehe _redirects)
     # Fehlerseite: ohne sie würde Cloudflare Pages bei unbekannten Adressen die Startseite ausliefern
     nf = {"path": "/404", "hero": "Page not found", "title": "Thomas Pölzler - Page not found",
           "description": "This page could not be found."}
@@ -364,12 +365,9 @@ def build_site():
                 if t2 != t:
                     open(fp, "w", encoding="utf-8").write(t2)
     # Weiterleitungen und Sitemap für Cloudflare Pages
-    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
+    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/research/papers/* /research/papers 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
     urls = "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, p["path"], "<lastmod>%s</lastmod>" % lastmod(p) if lastmod(p) else "")
                    for p in PAGES)
-    data_mod = lastmod({"src": os.path.join("..", "papers_data.json")})
-    urls += "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, e["path"], "<lastmod>%s</lastmod>" % data_mod if data_mod else "")
-                    for e in paper_entries if not e.get("noindex"))
     # Alte Adressen der Kurs-PDFs (früher mit „Syllabus “ am Anfang des Dateinamens) weiterleiten
     from urllib.parse import quote
     red = ""

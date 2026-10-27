@@ -22,13 +22,14 @@ Kommunikation mit Thomas: Deutsch, kurz, ohne Fachjargon, ohne typische KI-Flosk
 
 - `src/pages/*.html` – Inhalte der Seiten (HTML-Fragmente). Seitenliste, Titel, Beschreibungen,
   Navigation, strukturierte Daten: `src/build.py` (`PAGES`, `NAV`, `PERSON_LD`, `BOOKS_LD`).
-- `src/papers_data.json` – alle Einträge der Seite /research/papers und deren Einzelseiten
-  (`/research/papers/<slug>`, nur über Sitemap auffindbar). Logik: `src/papers.py`.
+- `src/papers_data.json` – alle Einträge der Seite /research/papers. Logik: `src/papers.py`.
+  Einzelseiten pro Paper (`/research/papers/<slug>`) gibt es seit 10/2026 nicht mehr (Thomas’ Wunsch);
+  alte Adressen leiten per `_redirects` auf /research/papers weiter. `build_paper_pages` in build.py wird nicht aufgerufen.
 - `src/assets/` – CSS (`css/style.css`), Schriften, Bilder, Skript, PDFs:
   - `files/papers/` – Publikations-PDFs, Dateiname `Pölzler (Jahr) - Titel.pdf`
     (Doppelpunkte und `?` im Titel weglassen; mehrere Autoren: `Pölzler and Paulo (2024) - …`).
   - `files/books/`, `files/CV_Thomas_Poelzler.pdf`, `files/cv/page-NN.webp` (Seitenbilder des CV-Betrachters).
-  - `img/papers/<slug>.jpg` – Vorschaubilder, erzeugt mit `python3 src/make_thumbs.py`
+  - `img/papers/<slug>.jpg` – Vorschaubilder (nur für die abgeschalteten Einzelseiten), erzeugt mit `python3 src/make_thumbs.py`
     (nimmt `src/covers/<slug>.pdf`, falls vorhanden, sonst die erste PDF-Seite).
 - `dist/` – fertige Website (wird committet; Cloudflare Pages liefert sie aus, ohne Build-Befehl).
 - `dist/_redirects` (Weiterleitungen alter Adressen) und `dist/_headers` werden in `src/build.py`
@@ -70,7 +71,7 @@ Website (`src/papers_data.json`, Reihenfolge = Reihenfolge im CV, neueste zuerst
   "lang": "de",                         // nur bei deutschen Texten
   "kind": "chapter",                    // chapter | conference | issue | review | oped (sonst Artikel)
   "book": "Buchtitel", "publisher": "Verlag",  // bei Kapiteln
-  "abstract": "…"                       // erscheint auf der Einzelseite
+  "abstract": "…"                       // für Metadaten/Bibliografie (Einzelseiten derzeit abgeschaltet)
 }
 ```
 

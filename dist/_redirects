@@ -1,6 +1,7 @@
 /start / 301
 /research/publications /research/papers 301
 /research/publications.html /research/papers 301
+/research/papers/* /research/papers 301
 /files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301
 /files/courses/Syllabus%20IB%20Theory%20of%20Knowledge%20(P%C3%B6lzler).pdf /files/courses/IB%20Theory%20of%20Knowledge%20(P%C3%B6lzler).pdf 301
 /files/courses/Syllabus%20IB%20Theory%20of%20Knowledge%20%28P%C3%B6lzler%29.pdf /files/courses/IB%20Theory%20of%20Knowledge%20%28P%C3%B6lzler%29.pdf 301
