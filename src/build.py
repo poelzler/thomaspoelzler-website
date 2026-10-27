@@ -365,7 +365,7 @@ def build_site():
                 if t2 != t:
                     open(fp, "w", encoding="utf-8").write(t2)
     # Weiterleitungen und Sitemap für Cloudflare Pages
-    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/research/papers/* /research/papers 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
+    open(os.path.join(OUT, "_redirects"), "w").write("/start / 301\n/research/publications /research/papers 301\n/research/publications.html /research/papers 301\n/research/papers/* /research/papers 301\n/files/papers/P%C3%B6lzler%20(2026)%20-%20War%20es%20falsch%20miteinander%20zu%20schlafen%20Jonathan%20Haidt%20hat%20%C3%BCber%20die%20Macht%20der%20Moral%20geschrieben.pdf /files/papers/P%C3%B6lzler%20(2026)%20-%20War%20es%20falsch,%20miteinander%20zu%20schlafen%20Jonathan%20Haidt%20hat%20%C3%BCber%20die%20Macht%20der%20Moral%20geschrieben.pdf 301\n/files/Poelzler_Moral_Reality_Sample_Chapter.pdf /files/books/P%C3%B6lzler%20(2018)%20-%20Moral%20Reality%20and%20the%20Empirical%20Sciences.pdf 301\n")
     urls = "".join("  <url><loc>%s%s</loc>%s</url>\n" % (SITE_URL, p["path"], "<lastmod>%s</lastmod>" % lastmod(p) if lastmod(p) else "")
                    for p in PAGES)
     # Alte Adressen der Kurs-PDFs (früher mit „Syllabus “ am Anfang des Dateinamens) weiterleiten
