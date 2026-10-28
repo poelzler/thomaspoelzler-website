@@ -13,10 +13,13 @@ from urllib.parse import quote
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "papers_data.json")
 SECTIONS = ["Journal Articles", "Chapters", "Conference Articles", "Edited Volumes", "Commentaries",
-            "Introductions", "Book Reviews", "Op-eds, Blog Posts, etc."]
+            "Introductions", "Book Reviews"]
+# Seite /research/public-philosophy (früher Rubrik „Op-eds, Blog Posts, etc.“ auf der Papers-Seite)
+PUBLIC_SECTIONS = ["Opinion Essays", "Review Essays", "Interviews and Reflections"]
 LABEL = {"Journal Articles": "Article", "Chapters": "Chapter", "Conference Articles": "Conference article",
          "Edited Volumes": "Special issue", "Commentaries": "Commentary", "Introductions": "Introduction",
-         "Book Reviews": "Book review", "Op-eds, Blog Posts, etc.": "Article", None: "Article"}
+         "Book Reviews": "Book review", "Opinion Essays": "Essay", "Review Essays": "Review essay",
+         "Interviews and Reflections": "Interview", None: "Article"}
 
 
 def load():
@@ -80,12 +83,13 @@ def resolve(s, by_title):
     return re.sub(r"@PAGE:([^\"]+)", lambda m: by_title[m.group(1)]["path"], s)
 
 
-def list_html():
-    """Inhalt der Seite /research/papers (Format wie bisher)."""
+def list_html(sections=None):
+    """Inhalt der Seite /research/papers bzw. /research/public-philosophy (gleiches Format)."""
+    sections = sections or SECTIONS
     E = load()
     by_title = {plain(e["title"]): e for e in E}
     out = []
-    for sec in SECTIONS:
+    for sec in sections:
         items = [e for e in E if e.get("sec") == sec]
         out.append('    <h2 class="sec">%s</h2>' % html.escape(sec))
         for n, e in enumerate(items, 1):

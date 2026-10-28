@@ -32,6 +32,7 @@ NAV = [
         ("Interests", "/research/interests"),
         ("Books", "/research/books"),
         ("Papers", "/research/papers"),
+        ("Public Philosophy", "/research/public-philosophy"),
         ("Presentations", "/research/presentations"),
         ("Projects", "/research/projects"),
     ]),
@@ -63,7 +64,9 @@ PAGES = [
     {"path": "/research/books", "src": "books.html", "hero": "Books", "title": "Thomas Pölzler - Books",
      "description": "Books by Thomas Pölzler: A Philosophical Perspective on Folk Moral Objectivism (Routledge 2022) and Moral Reality and the Empirical Sciences (Routledge 2018)."},
     {"path": "/research/papers", "src": "../papers_data.json", "gen": "papers", "hero": "Papers", "title": "Thomas Pölzler - Papers",
-     "description": "Papers by Thomas Pölzler, including journal articles, chapters, conference articles, edited volumes, book reviews and op-eds."},
+     "description": "Papers by Thomas Pölzler, including journal articles, chapters, conference articles, edited volumes and book reviews."},
+    {"path": "/research/public-philosophy", "src": "../papers_data.json", "gen": "public", "hero": "Public Philosophy", "title": "Thomas Pölzler - Public Philosophy",
+     "description": "Public philosophy by Thomas Pölzler: opinion essays, review essays and interviews in newspapers, magazines and blogs."},
     {"path": "/research/presentations", "src": "presentations.html", "hero": "Presentations", "title": "Thomas Pölzler - Presentations",
      "description": "Presentations by Thomas Pölzler at universities, conferences and workshops worldwide."},
     {"path": "/research/projects", "src": "projects.html", "hero": "Projects", "title": "Thomas Pölzler - Projects",
@@ -296,6 +299,8 @@ def out_file(path):
 def page_body(page):
     if page.get("gen") == "papers":
         return papers.list_html()
+    if page.get("gen") == "public":
+        return papers.list_html(papers.PUBLIC_SECTIONS)
     return open(os.path.join(ROOT, "pages", page["src"]), encoding="utf-8").read()
 
 
