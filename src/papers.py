@@ -14,7 +14,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "papers_data.json")
 SECTIONS = ["Journal Articles", "Chapters", "Conference Articles", "Edited Volumes", "Commentaries",
             "Introductions", "Book Reviews"]
-# Seite /research/public-philosophy (früher Rubrik „Op-eds, Blog Posts, etc.“ auf der Papers-Seite)
+# Seite /research/outreach (früher Rubrik „Op-eds, Blog Posts, etc.“ auf der Papers-Seite)
 PUBLIC_SECTIONS = ["Opinion Essays", "Review Essays", "Interviews and Reflections"]
 LABEL = {"Journal Articles": "Article", "Chapters": "Chapter", "Conference Articles": "Conference article",
          "Edited Volumes": "Special issue", "Commentaries": "Commentary", "Introductions": "Introduction",
@@ -84,7 +84,7 @@ def resolve(s, by_title):
 
 
 def list_html(sections=None):
-    """Inhalt der Seite /research/papers bzw. /research/public-philosophy (gleiches Format)."""
+    """Inhalt der Seite /research/papers bzw. /research/outreach (gleiches Format)."""
     sections = sections or SECTIONS
     E = load()
     by_title = {plain(e["title"]): e for e in E}

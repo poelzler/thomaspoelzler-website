@@ -248,11 +248,11 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .hero .bar { margin: 12px 0 0; }
   /* Publications: Abstände um die Überschriften werden bei schmaleren Fenstern etwas kleiner
      (gemessen bei 768 und 1440 px) */
-  .content.p-research-papers h2.sec, .content.p-research-public-philosophy h2.sec {
+  .content.p-research-papers h2.sec, .content.p-research-outreach h2.sec {
     margin-top: min(44.16px, 43.16px + (100vw - 768px) / 672);
     margin-bottom: min(17.88px, 16.88px + (100vw - 768px) / 672);
   }
-  .content.p-research-papers .lead-s, .content.p-research-public-philosophy .lead-s { padding-top: min(18px, 16px + (100vw - 768px) / 336); }
+  .content.p-research-papers .lead-s, .content.p-research-outreach .lead-s { padding-top: min(18px, 16px + (100vw - 768px) / 336); }
 }
 
 
@@ -276,8 +276,8 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 .content h2.sec.tight { margin-top: 25.66px; }
 .content h2.sec.hub { margin-top: 27.66px; }
-.content.p-research-papers h2.sec, .content.p-research-public-philosophy h2.sec { margin-top: 44.16px; }
-.content > h2.sec:first-child, .content.p-research-papers > h2.sec:first-child, .content.p-research-public-philosophy > h2.sec:first-child { margin-top: -1.9px; }
+.content.p-research-papers h2.sec, .content.p-research-outreach h2.sec { margin-top: 44.16px; }
+.content > h2.sec:first-child, .content.p-research-papers > h2.sec:first-child, .content.p-research-outreach > h2.sec:first-child { margin-top: -1.9px; }
 /* Unterüberschriften (18 pt), z. B. im Impressum */
 .content h3.sub {
   margin: 36.2px 0 17.3px;
@@ -528,7 +528,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .content h2.sec.lg { font-size: 28px; }
   .content h2.sec.md { font-size: 27.5px; }
   .content h2.sec.tight { margin-top: 27.5px; }
-  .content > h2.sec:first-child, .content.p-research-papers > h2.sec:first-child, .content.p-research-public-philosophy > h2.sec:first-child { margin-top: -0.5px; }
+  .content > h2.sec:first-child, .content.p-research-papers > h2.sec:first-child, .content.p-research-outreach > h2.sec:first-child { margin-top: -0.5px; }
   .content.p-about, .content.p-research, .content.p-teaching { padding-bottom: 57px; }
   /* Projects: Textfelder im Original am Handy schmaler */
   .content.p-research-projects p, .content.p-research-projects h2.sec { padding-right: 24px; }

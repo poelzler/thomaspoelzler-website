@@ -59,7 +59,7 @@ Website (`src/papers_data.json`, Reihenfolge = Reihenfolge im CV, neueste zuerst
 {
   "sec": "Journal Articles",            // Seite Papers: Journal Articles | Chapters | Conference Articles | Edited Volumes |
                                         // Commentaries | Introductions | Book Reviews
-                                        // Seite Public Philosophy (/research/public-philosophy):
+                                        // Seite Outreach (/research/outreach):
                                         // Opinion Essays | Review Essays | Interviews and Reflections
   "title": "Titel",
   "pdf": "Pölzler (2026) - Titel.pdf",  // Datei in src/assets/files/papers/; weglassen, wenn kein PDF
@@ -85,7 +85,7 @@ Die Bücher stehen nicht in der JSON-Datei, sondern in `src/pages/books.html` (u
 Lebenslauf: Eintrag in der passenden Rubrik unter „Publications“ ergänzen (Format siehe unten),
 neuester Eintrag oben als [1], alle folgenden Nummern der Rubrik um eins erhöhen.
 Rubriken im CV: Books, Journal Articles, Chapters, Conference Articles, Edited Volumes, Introductions,
-Comments, Book Reviews, Science to Public (auf der Website eigene Seite „Public Philosophy“ mit den Rubriken
+Comments, Book Reviews, Science to Public (auf der Website eigene Seite „Outreach“ mit den Rubriken
 Opinion Essays, Review Essays, Interviews and Reflections; der CV bleibt bei einer Rubrik).
 Sicherungsstand vor dieser Umstellung: Branch `stand-vor-public-philosophy`.
 
