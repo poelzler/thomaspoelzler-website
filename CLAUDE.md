@@ -60,7 +60,7 @@ Website (`src/papers_data.json`, Reihenfolge = Reihenfolge im CV, neueste zuerst
   "sec": "Journal Articles",            // Seite Papers: Journal Articles | Chapters | Conference Articles | Edited Volumes |
                                         // Commentaries | Introductions | Book Reviews
                                         // Seite Outreach (/research/outreach):
-                                        // Opinion Essays | Review Essays | Academic Blog Posts | Interviews and Reflections
+                                        // Opinion Essays | Review Essays | Research Notes | Interviews and Reflections
   "title": "Titel",
   "pdf": "Pölzler (2026) - Titel.pdf",  // Datei in src/assets/files/papers/; weglassen, wenn kein PDF
   "venue": "<i>Zeitschrift</i> 12 (3), 45-67. 2026.",   // Zeile unter dem Titel; endet mit ". Jahr."
@@ -86,7 +86,7 @@ Lebenslauf: Eintrag in der passenden Rubrik unter „Publications“ ergänzen (
 neuester Eintrag oben als [1], alle folgenden Nummern der Rubrik um eins erhöhen.
 Rubriken im CV: Books, Journal Articles, Chapters, Conference Articles, Edited Volumes, Introductions,
 Comments, Book Reviews, Science to Public (auf der Website eigene Seite „Outreach“ mit den Rubriken
-Opinion Essays, Review Essays, Academic Blog Posts, Interviews and Reflections; der CV bleibt bei einer Rubrik).
+Opinion Essays, Review Essays, Research Notes, Interviews and Reflections; der CV bleibt bei einer Rubrik).
 Sicherungsstand vor dieser Umstellung: Branch `stand-vor-public-philosophy`.
 
 Selbst gesetzte PDFs (Manuskriptfassungen) in Thomas’ Stil: `tools/paper_pdf/manuscript.py`

@@ -15,10 +15,10 @@ DATA = os.path.join(ROOT, "papers_data.json")
 SECTIONS = ["Journal Articles", "Chapters", "Conference Articles", "Edited Volumes", "Commentaries",
             "Introductions", "Book Reviews"]
 # Seite /research/outreach (früher Rubrik „Op-eds, Blog Posts, etc.“ auf der Papers-Seite)
-PUBLIC_SECTIONS = ["Opinion Essays", "Review Essays", "Academic Blog Posts", "Interviews and Reflections"]
+PUBLIC_SECTIONS = ["Opinion Essays", "Review Essays", "Research Notes", "Interviews and Reflections"]
 LABEL = {"Journal Articles": "Article", "Chapters": "Chapter", "Conference Articles": "Conference article",
          "Edited Volumes": "Special issue", "Commentaries": "Commentary", "Introductions": "Introduction",
-         "Book Reviews": "Book review", "Opinion Essays": "Essay", "Review Essays": "Review essay", "Academic Blog Posts": "Blog post",
+         "Book Reviews": "Book review", "Opinion Essays": "Essay", "Review Essays": "Review essay", "Research Notes": "Blog post",
          "Interviews and Reflections": "Interview", None: "Article"}
 
 
