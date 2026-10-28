@@ -76,7 +76,7 @@ PAGES = [
     {"path": "/teaching/courses", "src": "courses.html", "hero": "Courses", "title": "Thomas Pölzler - Courses",
      "description": "Courses taught by Thomas Pölzler at the University of Graz and elsewhere, on metaethics, moral psychology, political philosophy, climate ethics and experimental philosophy."},
     {"path": "/teaching/materials", "src": "materials.html", "hero": "Materials", "title": "Thomas Pölzler - Materials",
-     "description": "Free teaching materials by Thomas Pölzler: academic writing, critical thinking, ethics and political philosophy, IB Theory of Knowledge, and quizzes."},
+     "description": "Free teaching materials (Lehrmaterialien) by Thomas Pölzler: academic writing (wissenschaftliches Arbeiten), critical thinking (kritisches Denken), ethics and political philosophy (Ethik und politische Philosophie), IB Theory of Knowledge (Erkenntnistheorie), quizzes."},
     {"path": "/cv", "src": "cv.html", "hero": "CV", "title": "Thomas Pölzler - CV",
      "description": "Curriculum vitae of Thomas Pölzler, researcher at the University of Graz: education, positions, grants and awards, publications, talks and teaching (PDF)."},
     {"path": "/pictures", "src": "pictures.html", "hero": "Pictures", "title": "Thomas Pölzler - Pictures",
