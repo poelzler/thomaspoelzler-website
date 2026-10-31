@@ -46,7 +46,7 @@ NAV = [
 # Fertig nachgebaute Seiten: Pfad, Inhaltsdatei, Seitentitel im Titelbild, Beschreibung
 PAGES = [
     {"path": "/", "src": "start.html", "hero": "Welcome!", "title": "Thomas Pölzler, University of Graz",
-     "description": "I am a researcher at the University of Graz, Austria. My main areas of specialization are metaethics and moral psychology."},
+     "description": "I am a researcher at the University of Graz, Austria. My main areas of specialization are ethics and moral psychology."},
     {"path": "/about", "src": "about.html", "hero": "About", "title": "Thomas Pölzler - About",
      "description": "About Thomas Pölzler, researcher at the University of Graz, Austria: education, academic positions, grants and awards, and contact details."},
     {"path": "/about/education", "src": "education.html", "hero": "Education", "title": "Thomas Pölzler - Education",
