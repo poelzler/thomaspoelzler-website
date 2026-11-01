@@ -93,9 +93,9 @@
   "with_": "(with Norbert Paulo)",
   "pdf": "Pölzler and Paulo (2024) - Thought Experiments and Experimental Ethics.pdf",
   "venue": "<i>Inquiry</i> 67 (1), 355-383. 2024.",
-  "extra": "Republished in Serbian as Misaoni Eksperimenti I Eksperimentalna Etika. <i>a priori: naučno-popularni časopis</i> 2 (1). Translation by Ana Galić.",
+  "extra": "Republished in Serbian as Misaoni eksperimenti i eksperimentalna etika. <i>a priori: naučno-popularni časopis</i> 2 (1), 72-88. Translation by Ana Galić.",
   "cv": "Pölzler, Thomas; Paulo, Norbert (2024): Thought Experiments and Experimental Ethics. *Inquiry* 67 (1), 355-383.",
-  "cv_extra": "Republished in Serbian as Pölzler, Thomas; Paulo, Norbert (2022): Misaoni Eksperimenti I Eksperimentalna Etika. *a priori: naučno-popularni časopis* 2 (1). Translation by Ana Galić.",
+  "cv_extra": "Republished in Serbian as Pölzler, Thomas; Paulo, Norbert (2022): Misaoni eksperimenti i eksperimentalna etika. *a priori: naučno-popularni časopis* 2 (1), 72-88. Translation by Ana Galić.",
   "authors": [
    "Pölzler, Thomas",
    "Paulo, Norbert"
@@ -1157,7 +1157,9 @@
   "authors": [
    "Pölzler, Thomas"
   ],
-  "noindex": true
+  "noindex": true,
+  "extra": "Available in English as <a class=\"nu\" href=\"@PDF:Pölzler (2023) - Short Interview Thomas Pölzler.pdf\">Short Interview Thomas Pölzler</a>. <i>The Department as a Guest, Department of Philosophy, University of Graz</i>.",
+  "cv_extra": "Available in English as Pölzler, Thomas (2023): Short Interview Thomas Pölzler. *The Department as a Guest, Department of Philosophy, University of Graz*."
  },
  {
   "sec": "Interviews and Reflections",
@@ -1342,7 +1344,9 @@
   "lang": "en",
   "authors": [
    "Pölzler, Thomas"
-  ]
+  ],
+  "extra": "Included as student resource in: Vaughn, Lewis; Pojman, Louis P. (eds.): <i>The Moral Life: An Introductory Reader in Ethics and Literature</i>, 7th edition. New York: Oxford University Press. 2022.",
+  "cv_extra": "Included as student resource in: Vaughn, Lewis; Pojman, Louis P. (eds.) (2022): *The Moral Life: An Introductory Reader in Ethics and Literature*. 7th edition. New York: Oxford University Press."
  },
  {
   "sec": "Interviews and Reflections",
@@ -1357,7 +1361,9 @@
   "lang": "de",
   "authors": [
    "Pölzler, Thomas"
-  ]
+  ],
+  "extra": "Available in English as <a class=\"nu\" href=\"@PDF:Pölzler (2019) - Now tell me, how do you feel about morality.pdf\">Now tell me, how do you feel about morality?</a> FWF Magazine <i>scilog</i>.",
+  "cv_extra": "Available in English as Pölzler, Thomas (2019): Now tell me, how do you feel about morality? FWF Online Magazine *scilog*."
  },
  {
   "sec": "Opinion Essays",
