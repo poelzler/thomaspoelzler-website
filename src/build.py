@@ -380,6 +380,19 @@ def build_site():
         for safe in ("()", ""):
             red += "/files/courses/%s /files/courses/%s 301\n" % (quote("Syllabus " + f, safe=safe), quote(f, safe=safe))
     open(os.path.join(OUT, "_redirects"), "a").write(red)
+    # Umbenannte Lehrmaterialien (Tippfehler im Dateinamen korrigiert, 11/2026)
+    renamed = {
+        "Definitions-Übung Intergenerationelle Gerechtigkeit (Text Clarke Wolf - Intergenerational Justice, Human Needs, and Climate Policy).pdf":
+            "Definitions-Übung Intergenerationelle Gerechtigkeit (Text Clark Wolf - Intergenerational Justice, Human Needs, and Climate Policy).pdf",
+        "Quiz Regina Rini - Epoch Relativism and Our Moral Hopeless.pdf": "Quiz Regina Rini - Epoch Relativism and Our Moral Hopelessness.pdf",
+        "Tipps zum Verfassen des ToK Aufsatzes.pdf": "Tipps zum Verfassen des ToK-Aufsatzes.pdf",
+        "Vorlage zur Planung des ToK Aufsatzes.pdf": "Vorlage zur Planung des ToK-Aufsatzes.pdf",
+    }
+    red = ""
+    for a, b in renamed.items():
+        for safe in ("()", ""):
+            red += "/files/materials/%s /files/materials/%s 301\n" % (quote(a, safe=safe), quote(b, safe=safe))
+    open(os.path.join(OUT, "_redirects"), "a").write(red)
     # Die Vorschau-Adressen bei Cloudflare (pages.dev) sollen nicht in Google erscheinen, nur die eigene Domain
     open(os.path.join(OUT, "_headers"), "w").write(
         "https://thomaspoelzler.pages.dev/*\n  X-Robots-Tag: noindex\n"
