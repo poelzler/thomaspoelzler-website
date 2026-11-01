@@ -70,7 +70,7 @@ PAGES = [
     {"path": "/research/projects", "src": "projects.html", "hero": "Projects", "title": "Thomas Pölzler - Projects",
      "description": "Research projects of Thomas Pölzler on the veil of ignorance, basic needs, climate justice and moral realism."},
     {"path": "/research/outreach", "src": "../papers_data.json", "gen": "public", "hero": "Outreach", "title": "Thomas Pölzler - Outreach",
-     "description": "Outreach by Thomas Pölzler: opinion essays, review essays and interviews in newspapers, magazines and blogs."},
+     "description": "Outreach by Thomas Pölzler: opinion essays, review essays and interviews in newspapers, magazines and blogs, plus selected media coverage."},
     {"path": "/teaching", "src": "teaching.html", "hero": "Teaching", "title": "Thomas Pölzler - Teaching",
      "description": "Teaching of Thomas Pölzler at the University of Graz and elsewhere: courses in ethics, political philosophy and experimental philosophy, and teaching materials."},
     {"path": "/teaching/courses", "src": "courses.html", "hero": "Courses", "title": "Thomas Pölzler - Courses",

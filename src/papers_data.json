@@ -1345,14 +1345,14 @@
   "authors": [
    "Pölzler, Thomas"
   ],
-  "extra": "Included as student resource in: Vaughn, Lewis; Pojman, Louis P. (eds.): <i>The Moral Life: An Introductory Reader in Ethics and Literature</i>, 7th edition. New York: Oxford University Press. 2022.",
-  "cv_extra": "Included as student resource in: Vaughn, Lewis; Pojman, Louis P. (eds.) (2022): *The Moral Life: An Introductory Reader in Ethics and Literature*. 7th edition. New York: Oxford University Press."
+  "extra": "Included as student resource in: Vaughn, Lewis; Pojman, Louis P. (eds.): <i>The Moral Life: An Introductory Reader in Ethics and Literature</i>. New York: Oxford University Press. 2022.",
+  "cv_extra": "Included as student resource in: Vaughn, Lewis; Pojman, Louis P. (eds.) (2022): *The Moral Life: An Introductory Reader in Ethics and Literature*. New York: Oxford University Press."
  },
  {
   "sec": "Interviews and Reflections",
   "title": "Nun sag, wie hältst du’s mit der Moral?",
   "with_": "",
-  "venue": "FWF Magazine <i>scilog</i>. 2019.",
+  "venue": "FWF Magazin <i>scilog</i>. 2019.",
   "cv": "Pölzler, Thomas (2019): Nun sag, wie hältst du’s mit der Moral? FWF Online Magazine *scilog*.",
   "kind": "oped",
   "pdf": "Pölzler (2019) - Nun sag, wie hältst du’s mit der Moral.pdf",
@@ -1422,5 +1422,65 @@
   "authors": [
    "Pölzler, Thomas"
   ]
+ },
+ {
+  "sec": "Selected Media Coverage",
+  "title": "Zwischen Antibiotikastress und Waxmann",
+  "with_": "",
+  "venue": "<i>Kleine Zeitung</i>. 2023.",
+  "kind": "media",
+  "href": "https://www.kleinezeitung.at/steiermark/17790301/zwischen-antibiotikastress-und-waxmann",
+  "url": "https://www.kleinezeitung.at/steiermark/17790301/zwischen-antibiotikastress-und-waxmann",
+  "year": 2023,
+  "lang": "de",
+  "authors": []
+ },
+ {
+  "sec": "Selected Media Coverage",
+  "title": "Drei Österreicher in USA ausgezeichnet",
+  "with_": "",
+  "venue": "<i>science.ORF.at</i>. 2020.",
+  "kind": "media",
+  "href": "https://science.orf.at/stories/3201805/",
+  "url": "https://science.orf.at/stories/3201805/",
+  "year": 2020,
+  "lang": "de",
+  "authors": []
+ },
+ {
+  "sec": "Selected Media Coverage",
+  "title": "Was ist gerecht?",
+  "with_": "",
+  "venue": "<i>Universität Graz</i>. 2020.",
+  "kind": "media",
+  "href": "https://news.uni-graz.at/de/detail/article/was-ist-gerecht/",
+  "url": "https://news.uni-graz.at/de/detail/article/was-ist-gerecht/",
+  "year": 2020,
+  "lang": "de",
+  "authors": []
+ },
+ {
+  "sec": "Selected Media Coverage",
+  "title": "Gerechtigkeit und Klimaschutz",
+  "with_": "",
+  "venue": "<i>Die Presse</i>. 2019.",
+  "kind": "media",
+  "href": "https://diepresse.com/home/science/dissertation/5665715/Gerechtigkeit-und-Klimaschutz",
+  "url": "https://diepresse.com/home/science/dissertation/5665715/Gerechtigkeit-und-Klimaschutz",
+  "year": 2019,
+  "lang": "de",
+  "authors": []
+ },
+ {
+  "sec": "Selected Media Coverage",
+  "title": "Kulturell oder Universell: Wie relativ ist Moral?",
+  "with_": "",
+  "venue": "<i>Der Standard</i>. 2018.",
+  "kind": "media",
+  "href": "https://www.derstandard.at/story/2000086859959/kulturell-oder-universell-wie-relativ-ist-moral",
+  "url": "https://www.derstandard.at/story/2000086859959/kulturell-oder-universell-wie-relativ-ist-moral",
+  "year": 2018,
+  "lang": "de",
+  "authors": []
  }
 ]
