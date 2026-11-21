@@ -427,7 +427,8 @@ a, button { -webkit-tap-highlight-color: transparent; }
 
 .portrait { margin: 32px 0 29px; }
 .portrait img { display: block; width: 100%; height: auto; }
-.portrait figcaption { margin-top: 15px; padding: 0 8px; text-align: right; }
+.portrait figcaption { margin-top: 15px; padding: 0 8px; text-align: right; color: var(--grey); }
+.portrait figcaption a { color: var(--grey); }
 
 /* ---------- Fußbereich ---------- */
 .site-footer { background: var(--accent); color: #fff; }
