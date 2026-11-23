@@ -23,6 +23,10 @@ LABEL = {"Journal Articles": "Article", "Chapters": "Chapter", "Conference Artic
          "Interviews and Reflections": "Interview", "Selected Media Coverage": "Media coverage", None: "Article"}
 
 
+# Nummern [1], [2] … vor den Einträgen auf Papers und Outreach (Stand mit Nummern: Branch stand-mit-nummerierung)
+NUMBERING = False
+
+
 def load():
     E = json.load(open(DATA, encoding="utf-8"))
     seen = set()
@@ -101,7 +105,9 @@ def list_html(sections=None):
             else:
                 t = '<span class="u">%s</span>' % esc(e["title"])
             w = (" " + e["with_"]) if e.get("with_") else ""
-            p = "[%d] %s%s<br>%s" % (n, t, w, e["venue"])
+            p = "%s%s<br>%s" % (t, w, e["venue"])
+            if NUMBERING:
+                p = "[%d] %s" % (n, p)
             if e.get("extra"):
                 p += "<br>" + resolve(e["extra"], by_title)
             out.append("    <p>%s</p>" % p)
