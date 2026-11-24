@@ -494,6 +494,19 @@ a, button { -webkit-tap-highlight-color: transparent; }
     place-items: center;
   }
   .drawer-close svg { fill: var(--ink); }
+  .drawer-title {
+    position: absolute;
+    left: 40px;
+    top: 0;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    color: #a3a3a3;
+    font: 600 15px/1 var(--sans);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
 
   .drawer-nav, .drawer-nav ul { margin: 0; padding: 0; list-style: none; }
   .drawer-nav { padding: 56px 0 24px; }

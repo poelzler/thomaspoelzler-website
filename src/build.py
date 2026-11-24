@@ -122,6 +122,10 @@ def desktop_nav(cur):
     return "".join(out)
 
 
+# Name „THOMAS PÖLZLER“ oben im ausklappbaren Handy-Menü (False = ausblenden)
+DRAWER_TITLE = True
+
+
 def drawer_nav(cur):
     out = ['<ul class="drawer-nav">']
     for label, href, subs in NAV:
@@ -163,9 +167,11 @@ def chrome_top(cur):
         '<div class="scrim" aria-hidden="true"></div>\n'
         '<aside class="drawer" id="drawer" aria-label="Site navigation">\n'
         '  <button class="drawer-close" type="button" aria-label="Close navigation">%(close)s</button>\n'
+        '%(dtitle)s'
         '  %(drawer)s\n'
         '</aside>\n'
-    ) % dict(ICON, nav=desktop_nav(cur), drawer=drawer_nav(cur))
+    ) % dict(ICON, nav=desktop_nav(cur), drawer=drawer_nav(cur),
+           dtitle='  <span class="drawer-title" aria-hidden="true">Thomas Pölzler</span>\n' if DRAWER_TITLE else '')
 
 
 FOOTER = (
