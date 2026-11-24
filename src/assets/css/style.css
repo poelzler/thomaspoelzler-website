@@ -496,7 +496,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .drawer-close svg { fill: var(--ink); }
   .drawer-title {
     position: absolute;
-    left: 40px;
+    left: 46px;
     top: 6px;
     height: 56px;
     display: flex;
@@ -513,7 +513,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .drawer-nav li { position: relative; }
   .drawer-nav a {
     display: block;
-    padding: 8px 16px 8px 40px;
+    padding: 8px 16px 8px 46px;
     color: var(--grey);
     font: 400 16px/25.4px var(--sans);
     text-decoration: none;
@@ -522,7 +522,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .drawer-nav .current > a { color: var(--ink); }
   .drawer-nav .sub { display: none; }
   .drawer-nav .open > .sub { display: block; }
-  .drawer-nav .sub a { padding-left: 60px; }
+  .drawer-nav .sub a { padding-left: 66px; }
   .toggle {
     position: absolute;
     left: 13px;
