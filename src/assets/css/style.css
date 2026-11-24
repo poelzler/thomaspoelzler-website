@@ -501,7 +501,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
     height: 56px;
     display: flex;
     align-items: center;
-    color: #a3a3a3;
+    color: #e6c84f; /* vorher grau: #a3a3a3 (Stand im Branch stand-menuename-grau) */
     font: 600 15px/1 var(--sans);
     letter-spacing: .08em;
     text-transform: uppercase;
